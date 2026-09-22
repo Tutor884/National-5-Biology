@@ -1,6 +1,6 @@
 # 🏆 Scoreboard
 
-**Target: 200 XP by Mon 5 Oct.**
+**Target: 210 XP by Tue 6 Oct.**
 
 Tick the box, add the XP, commit the change. (Commit message suggestion: `Day 03 done — 15 XP`.)
 
@@ -20,6 +20,7 @@ Tick the box, add the XP, commit the change. (Commit message suggestion: `Day 03
 | 12 | Sat 3 Oct | [ ] | [ ] | | |
 | 13 | Sun 4 Oct | [ ] | — | | |
 | 14 | Mon 5 Oct | [ ] | — | | Mock: ___ / 40 |
+| 15 | Tue 6 Oct | [ ] | — | | Night before |
 | | | | **TOTAL** | | |
 
 ## XP values

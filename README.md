@@ -1,6 +1,6 @@
 # 🧬 Operation A-Pass — National 5 Biology
 
-**Pupil:** Joss (S5) · **Target:** A · **Boss fight:** class test, **Tue 6 / Wed 7 October**
+**Pupil:** Joss (S5) · **Target:** A · **Boss fight:** class test, **Wed 7 October**
 
 Test covers: **all of Unit 3 — Life on Earth** + **Unit 1 — Cell Biology, key areas 1.1 → 1.4**
 (cell structure · transport across membranes · DNA and the production of proteins · proteins)
@@ -28,7 +28,7 @@ Answers are hidden behind a `▶ Show answers` dropdown. **Write your answer fir
 - Boss question right → **+5 XP**
 - Full streak day → **+2 XP**
 
-Log it in [`SCOREBOARD.md`](SCOREBOARD.md). 200 XP by 5 October = ready.
+Log it in [`SCOREBOARD.md`](SCOREBOARD.md). 210 XP by 6 October = ready.
 
 ## Rules of the game
 
@@ -37,29 +37,30 @@ Log it in [`SCOREBOARD.md`](SCOREBOARD.md). 200 XP by 5 October = ready.
 3. **Red flags get a re-run.** Anything you got wrong goes in the "Repeat Offenders" list at the bottom of the scoreboard and comes back on Day 13.
 4. **Missed a day?** Don't double up. Just carry on — the plan is front-loaded on purpose.
 
-## The 14-day plan
+## The 15-day plan
 
 | Day | Date | Mission |
 |---|---|---|
-| [01](days/day-01.md) | Tue 22 Sep | Ecosystems: the vocabulary + niche + competition |
-| [02](days/day-02.md) | Wed 23 Sep | Distribution of organisms: biotic, abiotic, sampling |
-| [03](days/day-03.md) | Thu 24 Sep | Photosynthesis |
-| [04](days/day-04.md) | Fri 25 Sep | Energy in ecosystems + pyramids |
-| [05](days/day-05.md) | Sat 26 Sep | Food production 1: fertilisers, nitrates, algal blooms |
-| [06](days/day-06.md) | Sun 27 Sep | Food production 2: pesticides, biological control, GM |
-| [07](days/day-07.md) | Mon 28 Sep | Evolution 1: mutation, variation, natural selection |
-| [08](days/day-08.md) | Tue 29 Sep | Evolution 2: speciation + **Unit 3 mini-paper** |
-| [09](days/day-09.md) | Wed 30 Sep | Cell structure (1.1) |
-| [10](days/day-10.md) | Thu 1 Oct | Transport across cell membranes (1.2) |
-| [11](days/day-11.md) | Fri 2 Oct | DNA and the production of proteins (1.3) |
-| [12](days/day-12.md) | Sat 3 Oct | Proteins and enzymes (1.4) |
-| [13](days/day-13.md) | Sun 4 Oct | Exam skills: graphs, calculations, experimental design |
-| [14](days/day-14.md) | Mon 5 Oct | **Full mock paper** + repeat-offender blitz |
+| [01](day-01.md) | Tue 22 Sep | Ecosystems: the vocabulary + niche + competition |
+| [02](day-02.md) | Wed 23 Sep | Distribution of organisms: biotic, abiotic, sampling |
+| [03](day-03.md) | Thu 24 Sep | Photosynthesis |
+| [04](day-04.md) | Fri 25 Sep | Energy in ecosystems + pyramids |
+| [05](day-05.md) | Sat 26 Sep | Food production 1: fertilisers, nitrates, algal blooms |
+| [06](day-06.md) | Sun 27 Sep | Food production 2: pesticides, biological control, GM |
+| [07](day-07.md) | Mon 28 Sep | Evolution 1: mutation, variation, natural selection |
+| [08](day-08.md) | Tue 29 Sep | Evolution 2: speciation + **Unit 3 mini-paper** |
+| [09](day-09.md) | Wed 30 Sep | Cell structure (1.1) |
+| [10](day-10.md) | Thu 1 Oct | Transport across cell membranes (1.2) |
+| [11](day-11.md) | Fri 2 Oct | DNA and the production of proteins (1.3) |
+| [12](day-12.md) | Sat 3 Oct | Proteins and enzymes (1.4) |
+| [13](day-13.md) | Sun 4 Oct | Exam skills: graphs, calculations, experimental design |
+| [14](day-14.md) | Mon 5 Oct | **Full mock paper** (40 marks) |
+| [15](day-15.md) | Tue 6 Oct | Final consolidation + night-before routine |
 
 ## Also in here
 
-- [`resources/quick-reference.md`](resources/quick-reference.md) — the whole test on two pages, for the bus
-- [`resources/exam-technique.md`](resources/exam-technique.md) — command words and how marks are actually awarded
+- [`quick-reference.md`](quick-reference.md) — the whole test on two pages, for the bus
+- [`exam-technique.md`](exam-technique.md) — command words and how marks are actually awarded
 - [`SCOREBOARD.md`](SCOREBOARD.md) — XP, streak, repeat offenders
 
 ## Where the real work is set
