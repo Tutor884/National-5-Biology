@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="National 5 Biology revision — 15 daily missions to the 7 October test.">
+<meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1512" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="A-Pass">
+<title>Operation A-Pass</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#f4f6f5; --surface:#ffffff; --surface-2:#eef2f0;
+  --ink:#11201c; --muted:#5f7169; --faint:#8b9b94;
+  --accent:#0e7c58; --accent-ink:#ffffff; --accent-soft:#dcefe6;
+  --warn:#a8621a; --warn-soft:#f6e8d8;
+  --bad:#b3342b; --bad-soft:#f7e2e0;
+  --line:#dde4e1; --line-strong:#c3d1cb;
+  --shadow:0 1px 2px rgba(17,32,28,.06), 0 8px 24px -16px rgba(17,32,28,.25);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0d1512; --surface:#16211d; --surface-2:#1d2b26;
+    --ink:#e6efea; --muted:#94aba1; --faint:#6f877d;
+    --accent:#4cd39a; --accent-ink:#062116; --accent-soft:#17352a;
+    --warn:#e0a458; --warn-soft:#332616;
+    --bad:#e8756a; --bad-soft:#331d1b;
+    --line:#22322c; --line-strong:#33473f;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0d1512; --surface:#16211d; --surface-2:#1d2b26;
+  --ink:#e6efea; --muted:#94aba1; --faint:#6f877d;
+  --accent:#4cd39a; --accent-ink:#062116; --accent-soft:#17352a;
+  --warn:#e0a458; --warn-soft:#332616;
+  --bad:#e8756a; --bad-soft:#331d1b;
+  --line:#22322c; --line-strong:#33473f;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Bitter",Georgia,serif; text-wrap:balance; margin:0; line-height:1.2}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+button{font:inherit; color:inherit; cursor:pointer; background:none; border:none}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+
+/* ---- top bar ---- */
+.bar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--line);
+}
+.bar-in{max-width:780px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:14px}
+.brand{font-family:"Bitter",Georgia,serif; font-weight:700; font-size:15px; letter-spacing:-.01em; margin-right:auto; display:flex; align-items:baseline; gap:8px}
+.brand small{font-family:"IBM Plex Mono",monospace; font-weight:400; font-size:11px; color:var(--muted); letter-spacing:.02em}
+.stat{display:flex; flex-direction:column; align-items:flex-end; line-height:1.1}
+.stat b{font-family:"IBM Plex Mono",monospace; font-size:16px; font-variant-numeric:tabular-nums}
+.stat span{font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--faint)}
+
+/* ---- shell ---- */
+.wrap{max-width:780px; margin:0 auto; padding:0 16px; padding-block:20px 80px}
+.tabs{display:flex; gap:4px; margin-bottom:18px; border-bottom:1px solid var(--line)}
+.tab{padding:8px 12px; font-size:13px; font-weight:600; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--accent); border-bottom-color:var(--accent)}
+
+/* ---- day strip ---- */
+.strip{display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; margin-bottom:18px; scrollbar-width:thin}
+.chip{
+  flex:0 0 auto; width:46px; height:54px; border-radius:8px; border:1px solid var(--line);
+  background:var(--surface); display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:1px; position:relative;
+}
+.chip b{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600}
+.chip i{font-style:normal; font-size:9px; color:var(--faint); text-transform:uppercase; letter-spacing:.04em}
+.chip[data-state="done"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent)}
+.chip[data-state="today"]{border-color:var(--ink); border-width:2px}
+.chip[aria-current="true"]{box-shadow:0 0 0 2px var(--accent)}
+.chip .dot{position:absolute; top:4px; right:4px; width:5px; height:5px; border-radius:50%; background:var(--accent)}
+
+/* ---- cards ---- */
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; box-shadow:var(--shadow)}
+.card + .card{margin-top:14px}
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:6px}
+.dayhead{display:flex; align-items:flex-start; gap:12px; margin-bottom:4px}
+.dayhead h2{font-size:24px; flex:1}
+.dayhead .area{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); border:1px solid var(--line-strong); border-radius:99px; padding:2px 8px; white-space:nowrap}
+.sub{color:var(--muted); font-size:14px; margin:2px 0 0}
+
+/* stepper */
+.steps{display:flex; gap:6px; margin:18px 0 0}
+.step{flex:1; height:4px; border-radius:99px; background:var(--line)}
+.step.on{background:var(--accent)}
+.steplabel{display:flex; justify-content:space-between; margin-top:7px; font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--faint)}
+
+/* ---- prose (rendered drill) ---- */
+.prose{font-size:15.5px}
+.prose h3{font-size:16px; margin:20px 0 8px; color:var(--ink)}
+.prose h3:first-child{margin-top:0}
+.prose p{margin:0 0 10px}
+.prose ul,.prose ol{margin:0 0 12px; padding-left:22px}
+.prose li{margin-bottom:5px}
+.prose strong{font-weight:600; color:var(--ink)}
+.prose code{font-family:"IBM Plex Mono",monospace; font-size:.9em; background:var(--surface-2); padding:1px 5px; border-radius:4px}
+.prose blockquote{margin:14px 0; padding:11px 14px; background:var(--accent-soft); border-radius:8px; font-size:14.5px}
+.prose blockquote p:last-child{margin:0}
+.prose .warnquote{background:var(--warn-soft)}
+.tablewrap{overflow-x:auto; margin:0 0 14px}
+.prose table{border-collapse:collapse; width:100%; font-size:14px; min-width:min(100%,380px)}
+.prose th,.prose td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+.prose th{font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; border-bottom-color:var(--line-strong)}
+.prose tr:last-child td{border-bottom:none}
+
+/* ---- flashcard ---- */
+.flash{border:1px solid var(--line); border-radius:10px; padding:16px; background:var(--surface-2)}
+.flash + .flash{margin-top:10px}
+.flash .qq{font-weight:600; font-size:16px}
+.flash .aa{margin-top:10px; padding-top:10px; border-top:1px dashed var(--line-strong); font-size:15px; color:var(--ink)}
+.rowbtns{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+
+/* ---- buttons ---- */
+.btn{
+  border-radius:8px; padding:9px 15px; font-size:14px; font-weight:600;
+  border:1px solid var(--line-strong); background:var(--surface); transition:transform .08s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn.ghost{border-color:transparent; color:var(--muted)}
+.btn.good{border-color:var(--accent); color:var(--accent)}
+.btn.miss{border-color:var(--bad); color:var(--bad)}
+.btn:disabled{opacity:.45; cursor:default}
+.btn.full{width:100%}
+
+/* ---- questions ---- */
+.q{border-top:1px solid var(--line); padding-top:18px; margin-top:18px}
+.q:first-of-type{border-top:none; padding-top:0; margin-top:0}
+.qnum{display:flex; align-items:baseline; gap:10px; margin-bottom:8px}
+.qnum .n{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--faint); font-weight:600}
+.qnum .m{margin-left:auto; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:1px 8px; white-space:nowrap}
+textarea{
+  width:100%; min-height:82px; resize:vertical; padding:11px 13px; border-radius:8px;
+  border:1px solid var(--line-strong); background:var(--ground); color:var(--ink);
+  font:inherit; font-size:15px; line-height:1.5;
+}
+textarea::placeholder{color:var(--faint)}
+.scheme{margin-top:12px; padding:14px; border-radius:8px; background:var(--accent-soft); font-size:14.5px}
+.scheme .lbl{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); margin-bottom:6px}
+.marks{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:12px}
+.marks .lbl{font-size:12px; color:var(--muted); margin-right:2px}
+.mk{
+  width:34px; height:34px; border-radius:8px; border:1px solid var(--line-strong);
+  font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600; background:var(--surface);
+}
+.mk[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.mk.zero[aria-pressed="true"]{background:var(--bad); border-color:var(--bad); color:#fff}
+
+/* ---- multiple choice ---- */
+.opts{display:flex; flex-direction:column; gap:8px; margin-top:12px}
+.opt{
+  display:flex; align-items:flex-start; gap:11px; text-align:left; width:100%;
+  border:1px solid var(--line-strong); border-radius:9px; padding:11px 13px;
+  background:var(--surface); font-size:15px; line-height:1.45; transition:border-color .12s ease, background .12s ease;
+}
+.opt:hover:not(:disabled){border-color:var(--accent); background:var(--accent-soft)}
+.opt:disabled{cursor:default}
+.opt .ltr{
+  flex:0 0 auto; width:22px; height:22px; border-radius:5px; margin-top:1px;
+  background:var(--surface-2); color:var(--muted);
+  font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+}
+.opt .otxt{flex:1}
+.opt .tick,.opt .cross{flex:0 0 auto; font-size:15px; font-weight:700; margin-top:1px}
+.opt .tick{color:var(--accent)}
+.opt .cross{color:var(--bad)}
+.opt.right{border-color:var(--accent); background:var(--accent-soft)}
+.opt.right .ltr{background:var(--accent); color:var(--accent-ink)}
+.opt.wrong{border-color:var(--bad); background:var(--bad-soft)}
+.opt.wrong .ltr{background:var(--bad); color:#fff}
+.opt.dim{opacity:.45}
+.scheme.missed{background:var(--bad-soft)}
+.scheme.missed .lbl{color:var(--bad)}
+
+/* ---- progress view ---- */
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px}
+.tile b{display:block; font-family:"IBM Plex Mono",monospace; font-size:28px; line-height:1.1; font-variant-numeric:tabular-nums}
+.tile span{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--faint)}
+.off{border-left:3px solid var(--bad); padding:11px 0 11px 13px; margin-bottom:12px}
+.off .qt{font-weight:600; font-size:14.5px}
+.off .at{font-size:14px; color:var(--muted); margin-top:4px}
+.off .tag{font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--faint); text-transform:uppercase; letter-spacing:.06em}
+.empty{color:var(--muted); font-size:14.5px; padding:18px 0; text-align:center}
+
+/* ---- misc ---- */
+.banner{border-radius:10px; padding:14px 16px; font-size:14.5px; margin-bottom:16px; border:1px solid var(--line)}
+.banner.go{background:var(--accent-soft); border-color:var(--accent)}
+.banner b{font-weight:600}
+.done-big{text-align:center; padding:12px 0}
+.done-big .xp{font-family:"IBM Plex Mono",monospace; font-size:42px; font-weight:600; color:var(--accent); line-height:1}
+.nav{display:flex; gap:8px; margin-top:20px}
+.nav .btn{flex:1}
+.band{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:12px; padding:3px 10px; border-radius:99px; margin-top:8px}
+.band.a{background:var(--accent-soft); color:var(--accent)}
+.band.b{background:var(--warn-soft); color:var(--warn)}
+.band.c{background:var(--bad-soft); color:var(--bad)}
+.seq{border:1px solid var(--line); border-radius:10px; padding:15px; margin-bottom:10px; background:var(--surface-2)}
+.seq h4{font-size:15px; margin-bottom:0}
+.check{display:flex; gap:11px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--line); font-size:15px}
+.check:last-child{border-bottom:none}
+.check input{margin-top:4px; width:17px; height:17px; accent-color:var(--accent); flex:0 0 auto}
+.savenote{font-size:11px; color:var(--faint); text-align:center; margin-top:22px; font-family:"IBM Plex Mono",monospace}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+@media (max-width:420px){
+  .dayhead h2{font-size:20px}
+  .wrap{padding-block:16px 70px}
+  .card{padding:16px}
+}
+</style>
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{min-height:100%}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <div class="brand">Operation A-Pass <small id="countdown"></small></div>
+  <div class="stat"><b class="mono" id="xpStat">0</b><span>XP</span></div>
+  <div class="stat"><b class="mono" id="streakStat">0</b><span>Streak</span></div>
+</div></div>
+
+<div class="wrap">
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-mission" aria-selected="true">Mission</button>
+    <button class="tab" role="tab" id="tab-progress" aria-selected="false">Progress</button>
+    <button class="tab" role="tab" id="tab-offenders" aria-selected="false">Repeat offenders</button>
+  </div>
+  <div id="view"></div>
+  <p class="savenote" id="saveNote">&nbsp;</p>
+</div>
+
+<script id="course-data" type="application/json">{"test": {"label": "Wed 7 October", "iso": "2026-10-07"}, "days": [{"n": 1, "date": "Tue 22 Sep", "title": "Ecosystems", "area": "U3.1", "warmup": [{"q": "What is an **ecosystem** made of?", "a": ""}, {"q": "What is a **niche**?", "a": ""}, {"q": "Which is more intense — interspecific or intraspecific competition?", "a": ""}], "drill": "Copy these out **in your own handwriting**. Twelve definitions, and they are free marks.\n\n| Term | Definition |\n|---|---|\n| Species | Group of organisms that can interbreed to produce fertile offspring |\n| Biodiversity | The total variety of species in an ecosystem |\n| Population | All the organisms of **one species** in a habitat |\n| Community | **All** the organisms (all species) living in a habitat |\n| Habitat | The place where an organism lives |\n| Ecosystem | The community **plus** the non-living components it interacts with |\n| Producer | Organism that makes its own food by photosynthesis (green plant / algae) |\n| Consumer | Organism that eats other organisms |\n| Herbivore / Carnivore / Omnivore | Eats plants / eats animals / eats both |\n| Predator | Animal that hunts and kills another animal |\n| Prey | The animal that is hunted |\n| Food chain / web | A single feeding pathway / interlinked food chains |\n\n**Niche** — the *role* an organism plays in a community. It covers:\n- the resources it needs (light, nutrients…)\n- its interactions with others (competition, predation)\n- the conditions it can tolerate (e.g. temperature)\n\n**Competition** — happens when **resources are in short supply**.\n\n| | Who competes | What for | Intensity |\n|---|---|---|---|\n| **Inter**specific | **Different** species | One or a few shared resources | Less intense |\n| **Intra**specific | **Same** species | **All** the resources they need | **More intense** |\n\n> 🧠 **Memory hook:** *Intra* = *internal* = same species = **all** resources = **intense**.\n\n---", "reps": [{"q": "State the difference between a **population** and a **community**.", "marks": 1, "a": "A population is all the members of **one species** in a habitat; a community is **all the species / all the organisms** in that habitat. **(1)**", "options": ["A population is a community plus its habitat", "A population is all the members of **one species** in a habitat; a community is **all the organisms** of all species there", "A population is all the organisms in a habitat; a community is one species within it", "A population is one species plus the non-living factors it interacts with"], "correct": 1}, {"q": "Explain why **intraspecific** competition is more intense than interspecific competition.", "marks": 2, "a": "Members of the same species need **exactly the same resources** (1), so they compete for **all** of them, whereas different species only overlap on **one or a few** resources (1). **(2)**"}, {"q": "In a food web, all the ladybirds are removed. Ladybirds eat aphids; aphids feed on rose plants; blue tits eat ladybirds.\n\na) Describe the effect on the aphid population and explain why. (2)\n\nb) Describe the effect on the blue tit population. (1)", "marks": 3, "a": "a) Aphid numbers **increase** (1) because a predator has been removed / fewer aphids are eaten (1). **(2)**\n   b) Blue tit numbers **decrease** — they have lost a food source. **(1)**\n   *(If you wrote \"blue tits might eat something else instead\", that's good biology but SQA wants the direct effect first.)*"}, {"q": "Define the term **niche**.", "marks": 1, "a": "The **role** an organism plays in its community — the resources it uses, its interactions with other organisms, and the conditions it tolerates. **(1)**\n\n**Marking note:** \"where it lives\" for niche = **0 marks**. That's a habitat. This is the single most common lost mark in this key area.", "options": ["The total variety of species in an ecosystem", "The number of organisms of one species in a habitat", "The **role** an organism plays in its community — the resources it uses, its interactions with others, and the conditions it tolerates", "The place where an organism lives"], "correct": 2}], "boss": {"q": "Two species of barnacle live on the same rocky shore. Species A is found only on the upper shore. In the lab, species A grows perfectly well in lower-shore conditions when species B is absent.\n\n**Explain what this tells you about the distribution of species A on the shore. (2)**", "marks": 2, "a": "Species A is **not** restricted by abiotic conditions — it can tolerate the lower shore (1). It is excluded from the lower shore by **interspecific competition** with species B, which is the better competitor there (1). **(2)**\n\n*This is the classic Scottish barnacle example the SQA course notes point at. If you got both marks, take the +5 XP.*"}, "paper": null, "special": null}, {"n": 2, "date": "Wed 23 Sep", "title": "Distribution of organisms", "area": "U3.2", "warmup": [{"q": "Niche — define it in one sentence.", "a": "The role an organism plays in its community — the resources it needs, its interactions with others, and the conditions it tolerates."}, {"q": "Which competition is more intense, and why?", "a": "Intraspecific — same species compete for ALL the resources they need, not just one or two."}, {"q": "Ecosystem = ? + ?", "a": "The community (all the organisms) PLUS the non-living components they interact with."}], "drill": "**Biotic** = living factors: competition, disease, food availability, grazing, predation.\n**Abiotic** = non-living factors: light intensity, moisture, pH, temperature.\n\n> 🧠 **Hook:** bi-**O**-tic = **O**rganisms. A-biotic = **A**bsent of life.\n\n### Measuring abiotic factors\n\n| Factor | Instrument |\n|---|---|\n| Light intensity | Light meter |\n| Soil moisture | Moisture meter |\n| pH | pH meter / probe |\n| Temperature | Thermometer |\n\n**Sources of error** and how to fix them — learn this pattern, it is worth 2 marks over and over:\n\n| Error | How to minimise it |\n|---|---|\n| Shading the light meter with your body | Stand out of the way / hold meter away from you |\n| Meter probe not cleaned between readings | Wipe/clean the probe each time |\n| Meter not left long enough to settle | Wait for the reading to stabilise |\n| One reading only | Take **several readings and average** them |\n\n### Sampling\n\n| Method | Used for | Limitations / errors |\n|---|---|---|\n| **Quadrat** | Plants and slow-moving animals | Too few quadrats; placed non-randomly (biased); miscounting plants at the edge |\n| **Pitfall trap** | Small ground-dwelling invertebrates | Predators eat trapped prey inside; rain fills it; trap not covered so birds eat catch; too few traps |\n\n**How to minimise:** use **more** quadrats/traps, place them **randomly**, use the **same size** quadrat, empty traps regularly, put a **raised cover** over the trap.\n\n### Paired-statement keys\nTwo opposite statements at each step; follow the one that matches, which leads to the next pair or a name. Be able to **use** one and **construct** one.\n\n### Indicator species\nSpecies whose **presence or absence** indicates the level of pollution / environmental quality.\nExample: lichens — abundant in **clean** air, absent where SO₂ pollution is high. Mayfly nymphs indicate **clean** water; bloodworms/rat-tailed maggots indicate **polluted** water.\n\n---", "reps": [{"q": "Name **two** abiotic factors and **two** biotic factors.", "marks": 2, "a": "Abiotic — any two of: light intensity, moisture, pH, temperature. Biotic — any two of: competition, disease, food availability, grazing, predation. **(2)**"}, {"q": "A pupil used a light meter under a tree canopy. Give **one** source of error and how to minimise it.", "marks": 2, "a": "Error: the pupil's **shadow/body blocks light** from the meter (1). Minimise: **stand away from / do not shade the meter** when taking the reading (1). **(2)**\n   *(Also acceptable: meter not allowed to settle → wait for a stable reading.)*"}, {"q": "A pupil used five quadrats to estimate daisy numbers in a football pitch. Give **two** ways to improve the reliability of the results.", "marks": 2, "a": "Any two: use **more quadrats** (1); place them **randomly** (1); use the **same size** of quadrat throughout (1); repeat and **average** (1). **(2)**"}, {"q": "Explain what is meant by an **indicator species**.", "marks": 1, "a": "A species whose **presence or absence** indicates the **environmental quality / level of pollution**. **(1)**", "options": ["The most numerous species in an ecosystem", "A species whose **presence or absence** indicates the environmental quality or level of pollution", "A species that is the first to colonise a new habitat", "A species that competes with all the other species in a community"], "correct": 1}, {"q": "A pitfall trap contained one beetle and several beetle legs. Suggest why.", "marks": 1, "a": "A **predator** was also caught in the trap and ate the other beetles. **(1)**\n\n**Marking note:** for Q3, \"be more careful\" or \"do it again\" scores **nothing**. Say *more*, *random*, or *average*.", "options": ["A **predator** was also caught in the trap and ate the other beetles", "The beetles fought each other because of intraspecific competition", "The trap was too shallow, so most of the beetles escaped", "Rain washed the other beetles out of the trap"], "correct": 0}], "boss": {"q": "A student measured soil pH at 10 points across a field and found daisies only where pH was above 6.5. The student concluded that **pH determines daisy distribution**.\n\n**Give one reason why this conclusion may not be valid, and suggest how the investigation could be improved. (2)**", "marks": 2, "a": "**Not valid because:** only **one** abiotic factor was measured — other factors (light intensity, soil moisture, temperature) or biotic factors (grazing, competition) could be responsible (1).\n**Improvement:** measure the **other abiotic factors** at the same points / repeat the investigation in another field to confirm the pattern (1). **(2)**\n\n*\"Correlation is not cause\" is an A-grade instinct. Every time a question gives you one factor and one pattern, ask what else was changing.*"}, "paper": null, "special": null}, {"n": 3, "date": "Thu 24 Sep", "title": "Photosynthesis", "area": "U3.3", "warmup": [{"q": "Two abiotic factors, two biotic factors.", "a": "Biotic: competition, disease, food availability, grazing, predation. Abiotic: light intensity, moisture, pH, temperature."}, {"q": "One limitation of a pitfall trap.", "a": "A predator caught in the trap eats the other catch; rain fills it; too few traps used."}, {"q": "What does an indicator species tell you?", "a": "Its presence or absence indicates environmental quality / the level of pollution."}], "drill": "Photosynthesis is a **two-stage** process.\n\n### Stage 1 — Light reactions\n- **Light energy** from the sun is **trapped by chlorophyll** in the **chloroplasts**\n- Light energy is converted into **chemical energy**, which is used to **generate ATP**\n- **Water is split** into **hydrogen** and **oxygen**\n- **Oxygen diffuses out of the cell** (by-product)\n- **Passes on to stage 2:** hydrogen + ATP\n\n### Stage 2 — Carbon fixation\n- A series of **enzyme-controlled** reactions\n- Uses **hydrogen** and **ATP** (from the light reactions) plus **carbon dioxide**\n- Produces **sugar (glucose)**\n\n> 🧠 **Hook:** Light reactions *split water, make ATP*. Carbon fixation *fixes CO₂ into sugar*. The two things handed between them are **hydrogen and ATP** — that exact pair is a mark.\n\n### What happens to the sugar\n- Used in **respiration** (releases the chemical energy), **or**\n- Converted into other substances:\n  - **Starch** → **storage**\n  - **Cellulose** → **structural** (cell walls)\n\n### Limiting factors\nOnly **three**: **carbon dioxide concentration**, **light intensity**, **temperature**.\n\nA limiting factor is the factor **in shortest supply** that holds back the rate of photosynthesis.\n\n**Reading a limiting-factor graph:**\n- **Rising line** → the factor on the x-axis **is** limiting the rate\n- **Plateau (flat line)** → that factor is no longer limiting; **something else** is (one of the other two)\n- **Temperature curves that fall after a peak** → enzymes are being **denatured** (carbon fixation is enzyme-controlled)\n\n---", "reps": [{"q": "Name the two stages of photosynthesis.", "marks": 1, "a": "**Light reactions** and **carbon fixation**. **(1)**", "options": ["Respiration and carbon fixation", "Light reactions and fermentation", "Photolysis and glycolysis", "Light reactions and carbon fixation"], "correct": 3}, {"q": "Name the two substances passed from the light reactions to carbon fixation.", "marks": 1, "a": "**Hydrogen** and **ATP**. **(1)** *(Both needed for the mark.)*", "options": ["Carbon dioxide and water", "Energy and chlorophyll", "Hydrogen and ATP", "Oxygen and glucose"], "correct": 2}, {"q": "State **one** use of the sugar produced by photosynthesis, other than respiration.", "marks": 1, "a": "Converted to **starch for storage** OR **cellulose for structure/cell walls**. **(1)**", "options": ["Converted into chlorophyll to trap more light", "Converted into starch for storage, or cellulose for structure", "Converted into ATP for immediate energy", "Converted into oxygen and released from the leaf"], "correct": 1}, {"q": "A graph shows rate of photosynthesis rising with light intensity, then levelling off.\n\na) Explain what is limiting the rate in the **rising** part of the graph. (1)\n\nb) Suggest **two** factors that could be limiting the rate at the **plateau**. (2)", "marks": 3, "a": "a) **Light intensity** — as it increases the rate increases, so it is the limiting factor. **(1)**\n   b) **Carbon dioxide concentration** and **temperature**. **(2)**"}, {"q": "Explain why the rate of photosynthesis **falls** at temperatures above the optimum.", "marks": 2, "a": "The **enzymes** controlling carbon fixation are **denatured** (1); their **shape / active site changes**, so the reaction rate decreases (1). **(2)**\n\n**Marking note:** Q2 — writing \"energy\" instead of **ATP** loses the mark. Q5 — \"the enzymes die\" scores **nothing**. Enzymes are not alive. Use **denatured**."}], "boss": {"q": "A grower keeps a greenhouse at 25 °C with bright lighting. Adding a CO₂ generator increases tomato yield. The following summer, with the same lighting and CO₂ generator running, the grower notices the yield increase is smaller on very hot days when the greenhouse reaches 42 °C.\n\n**Explain this observation. (3)**", "marks": 3, "a": "- At 25 °C, CO₂ concentration was the **limiting factor**, so adding CO₂ increased the rate of photosynthesis and yield (1).\n- At 42 °C the **enzymes controlling carbon fixation are denatured** (1) — their **active site changes shape**, so the rate of photosynthesis falls (1).\n- Therefore extra CO₂ can no longer increase the rate, because **temperature** is now limiting. **(3)**\n\n*A-grade move: name which factor is limiting **at each stage**, not just \"temperature is too high\".*"}, "paper": null, "special": null}, {"n": 4, "date": "Fri 25 Sep", "title": "Energy in ecosystems", "area": "U3.4", "warmup": [{"q": "Two stages of photosynthesis, in order.", "a": "Light reactions, then carbon fixation."}, {"q": "The two things passed between them.", "a": "Hydrogen and ATP."}, {"q": "Three limiting factors.", "a": "Carbon dioxide concentration, light intensity, temperature."}], "drill": "### Energy loss along a food chain\n\nWhen energy is transferred from one level to the next, **the majority is lost** as:\n- **heat**\n- **movement**\n- **undigested materials**\n\nOnly a **very small quantity** is used for **growth**, and only that is available to the next level.\n\n> 🧠 **Hook:** **H·M·U** — Heat, Movement, Undigested. Three losses, three marks available.\n\n**Consequence:** food chains are short — there isn't enough energy left to support many levels.\n\n### Pyramids\n\n| | Pyramid of numbers | Pyramid of energy |\n|---|---|---|\n| Shows | The **number of organisms** at each level | The **energy** available at each level |\n| Units | (count) | **kJ/m²/year** |\n| Shape | Can be **irregular** | **Always a true pyramid** |\n\n**Why numbers pyramids go irregular:**\n- A **large producer** — e.g. **one oak tree** feeding thousands of insects → bottom bar is tiny\n- **Parasites** — e.g. hundreds of fleas on one fox → top bar is huge\n\n**Why energy pyramids are always true pyramids:** because energy is **always lost** between levels, so each level **always** has less energy than the one below it — regardless of the size or number of organisms.\n\n---", "reps": [{"q": "State **three** ways energy is lost between levels of a food chain.", "marks": 3, "a": "**Heat**, **movement**, **undigested materials**. **(3)**"}, {"q": "Give **one** difference between a pyramid of numbers and a pyramid of energy.", "marks": 1, "a": "Any one: numbers shows **count of organisms**, energy shows **energy available**; energy is measured in **kJ/m²/year**; numbers can be **irregular**, energy is **always a true pyramid**. **(1)**", "options": ["A pyramid of energy shows how much energy each organism needs to survive", "A pyramid of numbers shows the count of organisms; a pyramid of energy shows the energy available, in kJ/m²/year", "A pyramid of numbers is always a true pyramid; a pyramid of energy can be irregular", "A pyramid of numbers includes the producers; a pyramid of energy does not"], "correct": 1}, {"q": "Explain why a pyramid of numbers for the food chain\n   **oak tree → caterpillars → blue tits → sparrowhawks** is **not** a true pyramid shape.", "marks": 2, "a": "The oak tree is a **single, very large producer** (1), so the producer bar is **narrower** than the caterpillar bar above it, even though it supports them (1). **(2)**"}, {"q": "Explain why a pyramid of energy is **always** a true pyramid shape.", "marks": 2, "a": "Energy is **always lost** (as heat, movement and undigested material) at each transfer (1), so each successive level **always has less energy** than the one below (1). **(2)**"}, {"q": "A producer level contains 20 000 kJ/m²/year. The primary consumers contain 2 000 kJ/m²/year. Calculate the percentage of energy transferred.", "marks": 1, "a": "2 000 ÷ 20 000 × 100 = **10 %**. **(1)**\n\n**Marking note:** Q3 — \"because the tree is big\" on its own is weak. Say it is **one large producer supporting many consumers**, so the bar is **narrower**.", "options": ["90 %", "18 000 %", "10 %", "20 %"], "correct": 2}], "boss": {"q": "A farmer is told that a given area of land can feed more people if it grows wheat for humans than if it grows wheat to feed cattle that humans then eat.\n\n**Use your knowledge of energy transfer to explain why. (3)**", "marks": 3, "a": "- Eating wheat directly makes humans **primary consumers**; eating beef makes them **secondary consumers**, adding an extra level to the food chain (1).\n- At **each** transfer the **majority of energy is lost** as heat, movement and undigested materials (1).\n- So less energy is available at the higher level, and the same land therefore supports **fewer people** when cattle are involved (1). **(3)**"}, "paper": null, "special": null}, {"n": 5, "date": "Sat 26 Sep", "title": "Food production: fertilisers", "area": "U3.5", "warmup": [{"q": "Three ways energy is lost between trophic levels.", "a": "Heat, movement, undigested materials."}, {"q": "Why is a pyramid of energy always a true pyramid?", "a": "Energy is lost at every transfer, so each level always holds less than the one below."}, {"q": "Units for a pyramid of energy.", "a": "kJ/m²/year."}], "drill": "### Why we need increased yield\nThe **human population is increasing**, so **food yield must increase**. Two main tools: **fertilisers** and **pesticides**.\n\n- **Fertilisers** provide chemicals such as **nitrates**, which **increase crop yield**.\n- **Pesticides** kill plants and animals that **reduce crop yield**.\n\n### The nitrate story\n1. **Nitrates dissolved in soil water** are **absorbed into plants**\n2. Plants use nitrates to make **amino acids**\n3. Amino acids are **synthesised into plant proteins**\n4. **Animals eat plants (or other animals)** to obtain **amino acids** for their own **protein synthesis**\n5. **Fertiliser is added to soil to increase its nitrate content**\n\n> 🧠 **Hook:** nitrate → amino acid → protein. Three words, in that order. Miss out \"amino acids\" and you drop a mark.\n\n### The algal bloom chain — learn it in this exact order\n1. Fertiliser **leaches** into fresh water, adding **extra unwanted nitrates**\n2. **Algal populations increase** → an **algal bloom**\n3. The bloom **reduces light levels**, so **aquatic plants die**\n4. **Dead plants and dead algae** become **food for bacteria**\n5. **Bacteria increase greatly in number**\n6. Bacteria **use up large quantities of oxygen**\n7. **Oxygen availability is reduced** for other organisms (e.g. fish die)\n\n**Reducing the problem:** **GM crops** can be used to **reduce the use of fertilisers**.\n\n> ⚠️ **Do not** get dragged into the full nitrogen cycle — it is explicitly **not required** at N5.\n\n---", "reps": [{"q": "Explain why fertilisers increase crop yield.", "marks": 2, "a": "Fertilisers provide **nitrates** (1), which plants use to make **amino acids / proteins**, increasing growth and therefore yield (1). **(2)**"}, {"q": "Describe how nitrates absorbed by a plant are used.", "marks": 2, "a": "Nitrates are used to produce **amino acids** (1), which are **synthesised into plant proteins** (1). **(2)**"}, {"q": "Describe how the leaching of fertiliser into a loch can lead to the death of fish.", "marks": 4, "a": "Four marks from this chain — you need the sequence, not just the ending:\n   - Nitrates leach into the water, **algal populations increase / algal bloom** forms (1)\n   - The bloom **reduces light**, so **aquatic plants die** (1)\n   - **Bacteria feed on the dead algae and plants and increase greatly in number** (1)\n   - Bacteria **use up large quantities of oxygen**, so there is **not enough oxygen** for the fish (1) **(4)**"}, {"q": "State one way that GM crops can reduce the environmental impact of farming.", "marks": 1, "a": "GM crops can **reduce the use of fertilisers** (or reduce the use of pesticides). **(1)**\n\n**Marking note:** Q3 — the single most common error is jumping from \"algal bloom\" straight to \"fish die\". The **bacteria + oxygen** step is where two of the four marks live.", "options": ["They stop nitrates from leaching into fresh water entirely", "They increase the biodiversity of the field", "They can reduce the use of fertilisers or pesticides", "They remove nitrates from the soil after harvest"], "correct": 2}], "boss": {"q": "A farmer applies fertiliser to a field in heavy rain in October, when the crop has already been harvested.\n\n**Explain why this is both wasteful for the farmer and damaging to a nearby river. (3)**", "marks": 3, "a": "- With **no crop growing**, there are **no plant roots to absorb the nitrates** from the soil water (1).\n- Heavy rain means the nitrates are **leached** out of the soil into the river rather than being used — so the fertiliser is wasted (1).\n- The extra nitrates in the river cause an **increase in algal populations / algal bloom**, which sets off the light → plant death → bacteria → oxygen depletion chain (1). **(3)**"}, "paper": null, "special": null}, {"n": 6, "date": "Sun 27 Sep", "title": "Food production: pesticides", "area": "U3.5", "warmup": [{"q": "Nitrate → ? → ?", "a": "Nitrate → amino acids → proteins."}, {"q": "Write the algal bloom chain in four steps.", "a": "Leaching → algae increase → light reduced, plants die → bacteria multiply on the dead material → oxygen used up."}, {"q": "Why do bacteria cause the fish to die?", "a": "The bacteria use up large quantities of oxygen, leaving too little for the fish."}], "drill": "### Pesticides and accumulation\n- Pesticides **sprayed onto crops** can **accumulate in the bodies of organisms over time**\n- As they are **passed along food chains**, **toxicity increases**\n- It can reach **lethal levels** — usually in the **top consumer**, which has eaten the most contaminated prey\n\n> 🧠 **Hook:** the animal at the **top** of the chain gets the **worst** dose, because it eats many contaminated organisms and the pesticide is **not broken down or excreted**.\n\n### Two alternatives to pesticides\n\n**Biological control** — using a **natural predator (or parasite)** of the pest to reduce its numbers.\n- ✅ No toxic chemical to accumulate in food chains; doesn't leach into water\n- ⚠️ Risk: the control organism may itself become a pest, or eat non-target species\n\n**GM crops** — crops **genetically modified**, e.g. to be **resistant to pests**, reducing the need for pesticide; or to use nitrogen more efficiently, **reducing the need for fertiliser**.\n\n### The quick comparison table\n\n| | Fertilisers | Pesticides | Biological control | GM crops |\n|---|---|---|---|---|\n| Purpose | Increase yield via nitrates | Kill organisms reducing yield | Reduce pest numbers naturally | Reduce need for fertiliser/pesticide |\n| Main risk | **Leaching → algal bloom** | **Accumulation → toxicity up the food chain** | Control species becomes a pest | (Discussion point — no fixed N5 fact required) |\n\n---", "reps": [{"q": "Explain what is meant by the accumulation of pesticides in a food chain.", "marks": 2, "a": "The pesticide **builds up in the bodies of organisms over time** (1) and as it is **passed along the food chain its toxicity increases**, and can reach **lethal levels** (1). **(2)**"}, {"q": "In a food chain: algae → small fish → large fish → osprey, a pesticide was sprayed on nearby fields. Which organism would contain the **highest** concentration of pesticide? Explain your answer.", "marks": 2, "a": "The **osprey** (1) — it is at the **top of the food chain** and eats many contaminated organisms, so the pesticide has accumulated to the highest concentration (1). **(2)**"}, {"q": "Give **one** advantage and **one** disadvantage of using biological control instead of pesticides.", "marks": 2, "a": "Advantage: **no toxic chemicals** to accumulate in food chains / no leaching into water (1). Disadvantage: the **control organism may itself become a pest** or attack non-target species (1). **(2)**"}, {"q": "State **two** reasons a farmer might choose to grow a GM crop.", "marks": 2, "a": "Any two: **reduces the need for pesticides**; **reduces the need for fertilisers**; increases crop yield. **(2)**\n\n**Marking note:** Q2 — you must say **why** (top of chain / eats many contaminated organisms). Naming the osprey alone is 1 mark, not 2."}], "boss": {"q": "A pesticide was banned after populations of a bird of prey crashed. The pesticide was found at 0.02 ppm in lake water, 0.5 ppm in small fish, 2 ppm in large fish and 25 ppm in the birds.\n\na) Calculate how many times greater the concentration in the birds is than in the lake water. (1)\nb) Explain the pattern in the figures. (2)", "marks": 3, "a": "a) 25 ÷ 0.02 = **1250 times**. **(1)**\nb) The pesticide is **not broken down / not excreted**, so it **accumulates in the bodies** of organisms (1). Each organism eats **many** contaminated organisms from the level below, so the concentration **increases at each stage of the food chain** (1). **(2)**\n\n*Calculation tip: for \"how many times greater\", divide big ÷ small. Write the working — the mark is for the answer but working saves you if you slip.*"}, "paper": null, "special": null}, {"n": 7, "date": "Mon 28 Sep", "title": "Evolution: natural selection", "area": "U3.6", "warmup": [{"q": "Why does the top predator get the highest pesticide concentration?", "a": "It eats many contaminated organisms, and the pesticide accumulates and increases in toxicity along the chain."}, {"q": "One advantage and one disadvantage of biological control.", "a": "Advantage: no toxic chemical to accumulate or leach. Disadvantage: the control organism may itself become a pest."}, {"q": "What do GM crops reduce the need for?", "a": "Fertilisers and pesticides."}], "drill": "### Mutation\n- A mutation is a **random change to genetic material**\n- Mutations may be **neutral**, or confer an **advantage** or a **disadvantage** to survival\n- Mutations are **spontaneous** and are the **only source of new alleles**\n- **Environmental factors** such as **radiation** and **some chemicals** can **increase the rate** of mutation\n\n> ⚠️ Mutations are **not** caused by need. An organism does not mutate *because* it needs to. They happen randomly, and then the environment selects.\n\n### Variation and adaptation\n- New alleles produced by mutation can make plants and animals **better adapted to their environment**\n- **Variation within a population** makes it possible for a population to **evolve over time in response to changing environmental conditions**\n- A population with **no variation** cannot evolve — that is why low biodiversity is dangerous\n\n### Natural selection — the four steps\n\n1. Species produce **more offspring than the environment can sustain**\n2. There is **variation** within the population, and there are **selection pressures**\n3. The **best adapted individuals survive to reproduce**, passing on the **favourable alleles** that give the **selective advantage**\n4. These **alleles increase in frequency** in the population over generations\n\n> 🧠 **Hook:** **O·V·S·F** — Overproduction, Variation, Survival of the best adapted, Frequency of allele increases.\n\n**Rapid examples:** **MRSA** (antibiotic resistance), insect **resistance to GM crop toxins**, and pesticide resistance.\n\n---", "reps": [{"q": "Define the term **mutation**.", "marks": 1, "a": "A **random change to genetic material**. **(1)**", "options": ["A change in an organism caused by its environment", "A change an organism makes in order to survive better", "The passing of a useful characteristic to offspring", "A random change to genetic material"], "correct": 3}, {"q": "State **two** environmental factors that increase the rate of mutation.", "marks": 1, "a": "**Radiation** and **some chemicals**. **(1)**", "options": ["Competition and predation", "Light intensity and moisture", "Radiation and some chemicals", "Temperature and pH"], "correct": 2}, {"q": "Explain why mutation is important for evolution.", "marks": 2, "a": "Mutation is the **only source of new alleles** (1), producing the **variation** that natural selection acts on / allows the population to become better adapted to a changing environment (1). **(2)**"}, {"q": "A population of bacteria is treated with an antibiotic. Most die, but a few survive and the population recovers, now resistant. Explain this using natural selection.", "marks": 4, "a": "Four marks:\n   - A **random mutation** had already produced an allele giving **resistance** in a few bacteria — there is **variation** in the population (1)\n   - The antibiotic is a **selection pressure** (1)\n   - The **resistant bacteria survive and reproduce**, passing on the **favourable allele** (1)\n   - The **frequency of the resistance allele increases** in the population (1) **(4)**\n\n**Marking note:** never write that the bacteria \"became resistant because of the antibiotic\" or \"adapted themselves\". That is Lamarck, and it scores **zero**. The mutation was **already there**; the antibiotic only **selected** it."}], "boss": {"q": "A gardener sprays greenfly on roses with the same pesticide every year. In year 1 it kills 99 % of the greenfly. By year 6 it kills only 40 %.\n\na) Explain this change. (3)\nb) Suggest **one** alternative method of control the gardener could use. (1)", "marks": 4, "a": "a)\n- Some greenfly carried a **random mutation** giving **resistance** to the pesticide — **variation** existed in the population (1)\n- The pesticide is a **selection pressure**: the resistant greenfly **survive and reproduce**, passing on the **favourable allele** (1)\n- Over the generations the **frequency of the resistance allele increases**, so a greater proportion of the population survives the spray (1) **(3)**\n\nb) **Biological control** — introduce a natural predator such as ladybirds. **(1)**\n\n*This question is the whole of key area 6c plus 5d in one. If you nailed it, you are in A territory.*"}, "paper": null, "special": null}, {"n": 8, "date": "Tue 29 Sep", "title": "Speciation + Unit 3 paper", "area": "U3.6", "warmup": [], "drill": "### Speciation — the five steps\n\n1. Part of a population becomes **isolated by an isolation barrier**\n2. The barrier can be **geographical**, **ecological** or **behavioural**\n3. **Different mutations** occur in each sub-population\n4. **Natural selection selects for different mutations** in each group, because of **different selection pressures**\n5. Each sub-population **evolves** until they are so **genetically different** that they are **two different species**\n\n> 🧠 **Hook:** **I·M·S·S** — Isolation, Mutation, Selection, Speciation.\n\n### The three barriers\n\n| Barrier | What it means | Example |\n|---|---|---|\n| **Geographical** | A physical barrier separates them | Mountain range, river, sea, glacier |\n| **Ecological** | Different conditions/habitats within the same area | Different **pH**, **salinity**, or different habitats |\n| **Behavioural** | Differences in behaviour stop them breeding | Different courtship displays, different mating songs or times |\n\n**Scottish examples worth naming:** **Arran whitebeam**, **St Kilda wren**, **Arctic charr**.\n\n---", "reps": [], "boss": null, "paper": {"label": "Unit 3 mini-paper", "total": 20, "items": [{"q": "State the difference between an **ecosystem** and a **community**.", "marks": 1, "a": "Ecosystem = the **community plus the non-living (abiotic) components** it interacts with; community = **all the organisms** only. **(1)**", "options": ["An ecosystem is one species; a community is all the species", "An ecosystem is the place organisms live; a community is what they eat", "They mean the same thing", "An ecosystem is the community **plus** the non-living components it interacts with; a community is all the organisms only"], "correct": 3}, {"q": "Name **one** abiotic factor and describe how it is measured.", "marks": 2, "a": "Any one: light intensity — **light meter**; soil moisture — **moisture meter**; pH — **pH meter/probe**; temperature — **thermometer**. Naming the factor (1) + naming the instrument (1). **(2)**"}, {"q": "Give **two** sources of error when using quadrats.", "marks": 2, "a": "Any two: too few quadrats; not placed randomly / biased placement; miscounting organisms at the quadrat edge; different-sized quadrats used. **(2)**"}, {"q": "Name the two stages of photosynthesis and state **one** product of each.", "marks": 2, "a": "**Light reactions** → **ATP** (or oxygen / hydrogen) (1). **Carbon fixation** → **sugar/glucose** (1). **(2)**"}, {"q": "Explain what happens to the rate of photosynthesis when light intensity is increased but CO₂ concentration is low.", "marks": 2, "a": "The rate **increases at first** then **levels off** (1), because **CO₂ concentration becomes the limiting factor** (1). **(2)**"}, {"q": "Give **two** ways energy is lost between levels in a food chain.", "marks": 2, "a": "Any two of **heat**, **movement**, **undigested materials**. **(2)**"}, {"q": "Explain why a pyramid of energy is always a true pyramid.", "marks": 1, "a": "Because **energy is lost at every transfer**, so each level always has less energy than the one below. **(1)**", "options": ["Because energy is measured in kJ/m²/year rather than as a count", "Because energy is lost at every transfer, so each level always holds less energy than the one below", "Because there are always fewer organisms at each level going up", "Because producers are always larger than consumers"], "correct": 1}, {"q": "Describe how the leaching of nitrates can lead to a drop in oxygen levels in a loch.", "marks": 3, "a": "Nitrates cause **algae to increase / an algal bloom** (1); blocking light kills aquatic plants, and **bacteria feeding on the dead algae and plants increase greatly in number** (1); the **bacteria use up large quantities of oxygen** (1). **(3)**"}, {"q": "Explain why the top predator in a food chain has the highest concentration of pesticide.", "marks": 2, "a": "The pesticide **accumulates in the bodies of organisms** and its **toxicity increases along the food chain** (1); the top predator eats **many contaminated organisms** so the concentration is highest (1). **(2)**"}, {"q": "Describe how speciation occurs after a population is separated by a mountain range.", "marks": 3, "a": "The mountain range is a **geographical isolation barrier** separating the population (1); **different mutations** occur in each sub-population and **natural selection selects different mutations** because of **different selection pressures** (1); the sub-populations become so **genetically different** that they can no longer interbreed — they are **two species** (1). **(3)**"}]}, "special": null}, {"n": 9, "date": "Wed 30 Sep", "title": "Cell structure", "area": "U1.1", "warmup": [{"q": "Three types of isolation barrier.", "a": "Three barriers: geographical, ecological, behavioural."}, {"q": "What happens in each sub-population after isolation?", "a": "Different mutations occur, and natural selection selects differently because the selection pressures differ."}, {"q": "Name a Scottish example of speciation.", "a": "Arran whitebeam, St Kilda wren or Arctic charr."}], "drill": "### Organelles and functions\n\n| Organelle | Function |\n|---|---|\n| **Cell wall** | Supports and protects the cell; prevents bursting |\n| **Cell membrane** | Controls what enters and leaves the cell (selectively permeable) |\n| **Cytoplasm** | Where most chemical reactions of the cell take place |\n| **Nucleus** | Contains the genetic material / controls cell activities |\n| **Mitochondrion** | Site of **aerobic respiration** — releases energy |\n| **Chloroplast** | Site of **photosynthesis**; contains chlorophyll |\n| **Vacuole** | Contains cell sap; provides support |\n| **Ribosome** | Site of **protein synthesis** |\n| **Plasmid** | Small circular piece of DNA (bacteria) |\n\n### Which cell has what\n\n| | Plant | Animal | Fungal | Bacterial |\n|---|:--:|:--:|:--:|:--:|\n| Cell wall | ✅ **cellulose** | ❌ | ✅ **different material** | ✅ **different material** |\n| Cell membrane | ✅ | ✅ | ✅ | ✅ |\n| Cytoplasm | ✅ | ✅ | ✅ | ✅ |\n| Nucleus | ✅ | ✅ | ✅ | ❌ |\n| Mitochondria | ✅ | ✅ | ✅ | ❌ |\n| Chloroplasts | ✅ | ❌ | ❌ | ❌ |\n| Vacuole | ✅ (large, permanent) | ❌ | ✅ | ❌ |\n| Ribosomes | ✅ | ✅ | ✅ | ✅ |\n| Plasmid | ❌ | ❌ | ❌ | ✅ |\n\n**The three facts that get examined:**\n1. **Plant** cell walls are made of **cellulose**; **fungal** and **bacterial** cell walls are made of **different materials**. (You do **not** need to know which — that's explicitly excluded.)\n2. **Fungal cells** are like plant and animal cells but have a **different cell wall** and **no chloroplasts**.\n3. **Bacterial cells** have **no membrane-bound organelles** (no nucleus, no mitochondria, no chloroplasts) and a **different cell wall**; they have a **plasmid**.\n\n---", "reps": [{"q": "Name the organelle that is the site of aerobic respiration.", "marks": 1, "a": "**Mitochondrion**. **(1)**", "options": ["Nucleus", "Mitochondrion", "Chloroplast", "Ribosome"], "correct": 1}, {"q": "State **two** structures found in a plant cell but **not** in an animal cell.", "marks": 2, "a": "Any two: **chloroplast**, **cell wall**, (large permanent) **vacuole**. **(2)**"}, {"q": "A cell has a cell wall, a nucleus, mitochondria, ribosomes and a vacuole, but no chloroplasts. Is it plant, animal, fungal or bacterial? Explain.", "marks": 2, "a": "**Fungal** (1). It has a **cell wall and a vacuole** like a plant cell, but **no chloroplasts**, so it cannot photosynthesise (1). **(2)**"}, {"q": "State **two** ways a bacterial cell differs from a plant cell.", "marks": 2, "a": "Any two: bacterial cell has **no nucleus**; **no mitochondria**; **no chloroplasts**; has a **plasmid**; its cell wall is made of a **different material** (not cellulose). **(2)**"}, {"q": "Name the structure in a bacterial cell that consists of a small circle of DNA.", "marks": 1, "a": "**Plasmid**. **(1)**\n\n**Marking note:** for Q4, \"bacteria are smaller\" is not a structural difference from the spec list. Stick to the organelles.", "options": ["Vacuole", "Plasmid", "Nucleus", "Ribosome"], "correct": 1}], "boss": {"q": "Yeast is a single-celled fungus used to make bread. Onion epidermis cells are plant cells.\n\n**Give one structural similarity and two structural differences between a yeast cell and an onion epidermis cell. (3)**", "marks": 3, "a": "**Similarity (any one):** both have a **cell wall** / a **nucleus** / **mitochondria** / a **vacuole** / **ribosomes** / a **cell membrane**. (1)\n\n**Differences (any two):**\n- The onion cell wall is made of **cellulose**; the yeast cell wall is made of a **different material** (1)\n- The onion cell has **chloroplasts**; the yeast cell does not (1)\n\n*Note: onion epidermis cells are often drawn without chloroplasts in practicals because they grow underground — if a question shows you a diagram, answer from the diagram, not from the general rule.*"}, "paper": null, "special": null}, {"n": 10, "date": "Thu 1 Oct", "title": "Transport across membranes", "area": "U1.2", "warmup": [{"q": "Site of protein synthesis?", "a": "The ribosome."}, {"q": "Two structures in a bacterial cell that a plant cell does not have… and two the plant cell has that bacteria don't.", "a": "Bacteria have a plasmid and a different cell wall; plants have a nucleus, mitochondria, chloroplasts and a vacuole that bacteria lack."}, {"q": "What is a plant cell wall made of?", "a": "Cellulose."}], "drill": "### The membrane\nThe cell membrane consists of **phospholipids and proteins** and is **selectively permeable** (it lets some molecules through but not others).\n\n### Passive transport\n**Passive transport occurs down a concentration gradient and does NOT require energy.**\nTwo examples: **diffusion** and **osmosis**.\n\n- **Diffusion** — the movement of **molecules** **down a concentration gradient**, from a **higher** to a **lower** concentration.\n- **Osmosis** — the movement of **water molecules** from a **higher water concentration** to a **lower water concentration**, **through a selectively permeable membrane**.\n\n> ⚠️ **Word-perfect osmosis:** *water molecules* + *high water concentration to low water concentration* + *through a selectively permeable membrane*. All three parts. \"High to low concentration\" alone loses the mark because it doesn't say **water**.\n\n### Active transport\n**Active transport requires energy** for **membrane proteins** to move molecules and ions **against the concentration gradient**.\n(The detailed mechanism is **not required** — don't over-explain.)\n\n| | Direction | Energy? |\n|---|---|---|\n| Diffusion | **Down** the gradient | No |\n| Osmosis | **Down** the water gradient | No |\n| Active transport | **Against** the gradient | **Yes** |\n\n### What happens to cells\n\n| Solution | Water moves | Animal cell | Plant cell |\n|---|---|---|---|\n| **Hypotonic** (higher water conc. outside) | **In** | Swells and **bursts** | Becomes **turgid** (cell wall stops bursting) |\n| **Isotonic** (same) | No net movement | Normal | Normal / flaccid |\n| **Hypertonic** (lower water conc. outside) | **Out** | **Shrinks** | Becomes **plasmolysed** |\n\n**Key comparison:** the **cell wall** prevents the plant cell bursting, which is why a plant cell becomes turgid where an animal cell would burst.\n\n---", "reps": [{"q": "Define **osmosis**.", "marks": 2, "a": "The movement of **water molecules** (1) from a region of **higher water concentration to a region of lower water concentration through a selectively permeable membrane** (1). **(2)**"}, {"q": "State **two** differences between diffusion and active transport.", "marks": 2, "a": "Any two, as a pair of contrasts: diffusion moves substances **down** the gradient, active transport moves them **against** it (1); diffusion requires **no energy**, active transport **requires energy** (1); active transport requires **membrane proteins** (1). **(2)**"}, {"q": "Red blood cells are placed in pure water. Describe and explain what happens.", "marks": 2, "a": "Water moves **into** the cell by **osmosis** (the water concentration is higher outside) (1); the cell **swells and bursts**, because an animal cell has **no cell wall** (1). **(2)**"}, {"q": "A plant cell is placed in a concentrated salt solution. Name the term describing its appearance afterwards and explain why.", "marks": 2, "a": "**Plasmolysed** (1). Water moves **out of the cell by osmosis** because the water concentration outside is lower, so the membrane pulls away from the cell wall (1). **(2)**"}, {"q": "Explain why a cell that has been treated with a respiratory inhibitor can still carry out diffusion but not active transport.", "marks": 2, "a": "Diffusion is **passive** and **does not require energy**, so it continues (1). Active transport **requires energy from respiration**, which the inhibitor has stopped, so it cannot take place (1). **(2)**\n\n**Marking note:** Q1 — if you wrote \"movement of water from high to low concentration\", that's **1 mark at best**. It must be **water concentration** and it must mention the **selectively permeable membrane**."}], "boss": {"q": "Potato discs of equal mass were placed in sucrose solutions of different concentration for 30 minutes and reweighed.\n\n| Sucrose conc. (M) | Change in mass (%) |\n|---|---|\n| 0.0 | +8 |\n| 0.2 | +3 |\n| 0.4 | 0 |\n| 0.6 | −5 |\n| 0.8 | −9 |\n\na) Explain the result at 0.0 M. (2)\nb) What does the result at 0.4 M tell you about the potato cells? (1)", "marks": 3, "a": "a) The water concentration is **higher outside** the cells than inside (1), so water moves **into the cells by osmosis**, increasing their mass (1). **(2)**\nb) At 0.4 M there is **no net movement of water** — the water concentration of the sucrose solution is **equal to** the water concentration inside the potato cells. **(1)**\n\n*A-grade extra: the 0.4 M point is how you work out the internal concentration of a tissue. Expect this experiment to appear.*"}, "paper": null, "special": null}, {"n": 11, "date": "Fri 2 Oct", "title": "DNA and protein production", "area": "U1.3", "warmup": [{"q": "Define osmosis — word perfect.", "a": "Water molecules moving from higher water concentration to lower water concentration through a selectively permeable membrane."}, {"q": "Active transport: which direction, and does it need energy?", "a": "Against the concentration gradient, and yes — it requires energy."}, {"q": "What happens to an animal cell in pure water, and why doesn't a plant cell do the same?", "a": "The animal cell bursts; the plant cell becomes turgid because its cell wall prevents bursting."}], "drill": "### DNA structure\n- DNA is a **double-stranded helix** held together by **complementary base pairs**\n- DNA carries the **genetic information for making proteins**\n- Four bases: **adenine (A), cytosine (C), guanine (G), thymine (T)** — they make up the **genetic code**\n- **A always pairs with T**; **C always pairs with G**\n- The **base sequence determines the amino acid sequence** in a protein\n- A **gene** is a **section of DNA that codes for a protein**\n\n> 🧠 **Hook:** **A–T** (Apple Tree) and **C–G** (Car Garage).\n\n### mRNA\n**Messenger RNA (mRNA)** is a molecule which:\n- carries a **complementary copy** of the genetic code\n- **from the DNA, in the nucleus**\n- **to a ribosome**, where the **protein is assembled from amino acids**\n\n> ⚠️ Not required at N5: **uracil**, and the detailed stages of transcription and translation. Don't write them — they can't earn marks and they waste time.\n\n### The chain to memorise\n**DNA (nucleus) → base sequence → mRNA → ribosome → amino acids assembled → protein**\n\n### Numeracy\nIf a section of DNA has 200 bases in total and 60 are adenine:\n- adenine = 60, so **thymine = 60** (A pairs with T)\n- 200 − 120 = 80 remaining, split equally: **cytosine = 40, guanine = 40**\n\n---", "reps": [{"q": "Describe the structure of DNA.", "marks": 2, "a": "**Double-stranded helix** (1) held together by **complementary base pairs** — A with T, C with G (1). **(2)**"}, {"q": "Define the term **gene**.", "marks": 1, "a": "A **section of DNA that codes for a protein**. **(1)** *(Also acceptable: a sequence of bases that codes for a protein.)*", "options": ["A section of DNA", "A molecule that carries the genetic code to the ribosome", "One of the four bases in DNA", "A section of DNA that codes for a protein"], "correct": 3}, {"q": "State the function of mRNA.", "marks": 2, "a": "mRNA carries a **complementary copy of the genetic code** (1) **from the DNA in the nucleus to a ribosome** (1). **(2)**"}, {"q": "Name the organelle where a protein is assembled.", "marks": 1, "a": "**Ribosome**. **(1)**", "options": ["Cell membrane", "Ribosome", "Nucleus", "Mitochondrion"], "correct": 1}, {"q": "A section of DNA contains 1 000 bases, of which 300 are guanine. Calculate the number of adenine bases.", "marks": 1, "a": "Guanine 300 → cytosine 300. 1 000 − 600 = 400, split equally → **adenine = 200**. **(1)**", "options": ["200", "400", "300", "700"], "correct": 0}, {"q": "What determines the sequence of amino acids in a protein?", "marks": 1, "a": "The **base sequence of the DNA**. **(1)**\n\n**Marking note:** Q2 — \"a part of DNA\" alone is 0. It must say it **codes for a protein**.", "options": ["The shape of the ribosome", "The number of bases in the gene", "The mRNA's own sequence of amino acids", "The base sequence of the DNA"], "correct": 3}], "boss": {"q": "A mutation changes one base in a gene, altering the amino acid sequence of the enzyme it codes for.\n\n**Explain why this could stop the enzyme working. (3)**", "marks": 3, "a": "- The **base sequence determines the amino acid sequence** of the protein (1)\n- The **sequence of amino acids determines the protein's shape** (1)\n- If the shape of the **active site** changes, it is **no longer complementary to the substrate**, so the enzyme cannot bind it and the reaction does not take place (1) **(3)**\n\n*This links key area 3 to key area 4 — exactly the kind of \"integrating knowledge\" question that separates A from B. Tomorrow's topic feeds straight into it.*"}, "paper": null, "special": null}, {"n": 12, "date": "Sat 3 Oct", "title": "Proteins and enzymes", "area": "U1.4", "warmup": [{"q": "A pairs with…? C pairs with…?", "a": "A with T, C with G."}, {"q": "Define a gene.", "a": "A section of DNA that codes for a protein."}, {"q": "What does mRNA carry, from where, to where?", "a": "A complementary copy of the genetic code, from the DNA in the nucleus to a ribosome."}], "drill": "### Proteins\n- The **variety of protein shapes and functions arises from the sequence of amino acids**\n- Functions: **structural**, **enzymes**, **hormones**, **antibodies**, **receptors**\n\n> 🧠 **Hook:** **S·E·H·A·R** — Structural, Enzymes, Hormones, Antibodies, Receptors.\n\n### Enzymes\n- Enzymes are **biological catalysts**, **made by all living cells**\n- They **speed up cellular reactions** and are **unchanged in the process** (so they can be reused)\n- The **shape of the active site** is **complementary to its specific substrate(s)**\n- An **enzyme–substrate complex** forms, facilitating the reaction\n- Enzyme action results in **product(s)**\n\n**Two reaction types:**\n\n| Type | What happens | Example |\n|---|---|---|\n| **Degradation** | One large substrate → **broken down** into smaller products | Amylase: starch → maltose · Catalase: hydrogen peroxide → water + oxygen · Pepsin: protein → peptides |\n| **Synthesis** | Two or more small substrates → **built up** into one larger product | Phosphorylase: glucose-1-phosphate → starch |\n\n### Optimum conditions and denaturation\n- Each enzyme is **most active in its optimum conditions**\n- Enzymes, **and other proteins**, can be affected by **temperature** and **pH**\n- Enzymes can be **denatured**, resulting in a **change in their shape**, which **affects the rate of reaction**\n\n**Reading an enzyme graph:**\n- Rate **rises** to a **peak** = the **optimum**\n- Rate **falls** after the peak = the enzyme is being **denatured** — its **active site changes shape** so it is **no longer complementary to the substrate**\n- On the **pH** graph, the same logic applies either side of the optimum\n\n> ⚠️ Never write \"the enzyme dies\" or \"the enzyme is killed\". Enzymes are molecules. Write **denatured**.\n\n---", "reps": [{"q": "State **three** functions of proteins other than as enzymes.", "marks": 3, "a": "Any three: **structural**, **hormones**, **antibodies**, **receptors**. **(3)**"}, {"q": "Explain why an enzyme can only act on one substrate.", "marks": 2, "a": "The **active site** of the enzyme has a **specific shape** (1) which is **complementary only to its specific substrate**, so no other substrate can bind (1). **(2)**"}, {"q": "An enzyme has an optimum temperature of 40 °C. Explain why its activity is very low at 70 °C.", "marks": 2, "a": "At 70 °C the enzyme is **denatured** (1); the **shape of its active site changes**, so it is **no longer complementary to the substrate** and the rate of reaction falls (1). **(2)**"}, {"q": "Give **one** example of a degradation reaction and **one** of a synthesis reaction, naming the enzyme, substrate and product in each.", "marks": 2, "a": "**Degradation:** amylase breaks down **starch** into **maltose** (1). **Synthesis:** phosphorylase builds **glucose-1-phosphate** into **starch** (1). *(Catalase: hydrogen peroxide → water + oxygen is also accepted for degradation.)* **(2)**"}, {"q": "Why can a small quantity of enzyme catalyse a large quantity of substrate?", "marks": 1, "a": "The enzyme is **unchanged in the reaction**, so it can be **reused** on further substrate molecules. **(1)**\n\n**Marking note:** for Q3 the SQA mark scheme wants the **shape/active site change**, not just the word \"denatured\". Always give both halves.", "options": ["The enzyme gets used up slowly, so a little lasts a long time", "The enzyme lowers the amount of substrate needed for the reaction", "The enzyme splits into copies of itself as it works", "The enzyme is unchanged in the reaction, so it can be reused on further substrate molecules"], "correct": 3}], "boss": {"q": "A pupil investigated catalase activity by measuring the height of oxygen foam produced from hydrogen peroxide at five pH values. Each pH was tested once.\n\n| pH | Foam height (mm) |\n|---|---|\n| 3 | 2 |\n| 5 | 14 |\n| 7 | 31 |\n| 9 | 12 |\n| 11 | 1 |\n\na) State the optimum pH of catalase from these results. (1)\nb) Explain the result at pH 11. (2)\nc) Give **one** way the reliability of the results could be improved. (1)", "marks": 4, "a": "a) **pH 7**. **(1)**\nb) At pH 11 the enzyme is **denatured** (1) — the **shape of its active site has changed** so it is **no longer complementary to hydrogen peroxide**, so very little oxygen is produced (1). **(2)**\nc) **Repeat the experiment at each pH and calculate an average.** **(1)**\n   *(Not \"test more pH values\" — that improves the **validity/accuracy of the optimum**, not reliability. If the question asks how to find a **more accurate optimum**, then you would say \"test more pH values between 5 and 9\".)*"}, "paper": null, "special": null}, {"n": 13, "date": "Sun 4 Oct", "title": "Exam skills", "area": "Skills", "warmup": [], "drill": "### The command words\n\n| Word | What SQA wants | Marks lost if you… |\n|---|---|---|\n| **State / Name / Give** | One short fact. No explanation needed. | …write a paragraph and run out of time |\n| **Describe** | Say **what happens** — the sequence of events | …explain why instead |\n| **Explain** | Say **why** it happens — the reason/mechanism | …only describe |\n| **Suggest** | A sensible idea using your biology — there may be several right answers | …leave it blank because you're not sure |\n| **Calculate** | A number, **with the correct unit** | …forget the unit |\n| **Predict** | Extend the pattern in the data | …invent something unrelated to the trend |\n\n> 🎯 If a 2-mark question says **explain**, you need **two linked reasons**, not one reason written twice.\n\n### The five calculations that come up\n\n| Type | Method | Example |\n|---|---|---|\n| **Percentage** | part ÷ whole × 100 | 2 000 of 20 000 kJ → 10 % |\n| **Percentage change** | (change ÷ **original**) × 100 | 40 → 50 = 10 ÷ 40 × 100 = 25 % increase |\n| **Ratio** | Divide both sides by the smaller, **simplify**, keep the **order asked for** | 15 : 45 → **1 : 3** |\n| **Average (mean)** | Total ÷ number of values | |\n| **Rate** | Quantity ÷ time (**give the unit**, e.g. cm³/min) | 30 cm³ in 5 min = 6 cm³/min |\n\n⚠️ **Ratio traps:** always simplify, and always answer in the **order the question asks**. \"Ratio of A to B\" ≠ \"ratio of B to A\".\n⚠️ **Percentage change traps:** divide by the **original** value, not the new one.\n\n### Graphs — how to not lose the drawing marks\n\n1. Use the **axes given**, with the **correct scale** — and use **at least half the grid**\n2. **Label both axes with units**\n3. **Plot points accurately**, join with **straight ruled lines** point to point (unless told to draw a curve of best fit)\n4. Add a **key** if there are two lines\n\n### Experimental design — the standard answers\n\n| Question | Standard answer |\n|---|---|\n| \"How would you improve **reliability**?\" | **Repeat the experiment and calculate an average** |\n| \"Why was a **control** used?\" | To show the result was **due to the factor being investigated** and nothing else |\n| \"Give **two variables** to be kept constant\" | Anything except the one being changed — volume, concentration, temperature, time, mass, pH |\n| \"Why is this conclusion **not valid**?\" | Only **one** factor was measured / other variables were not controlled / only one trial was carried out |\n| \"How would you get a **more accurate** value for the optimum?\" | Test **more values in narrower intervals** around the peak |\n\n---", "reps": [{"q": "In an ecosystem survey, 24 of 60 quadrats contained clover. Calculate the percentage.", "marks": 1, "a": "24 ÷ 60 × 100 = **40 %**. **(1)**", "options": ["60 %", "2.5 %", "40 %", "24 %"], "correct": 2}, {"q": "A plant was 12 cm tall and grew to 21 cm in 6 days. Calculate the **average growth rate** per day, with units.", "marks": 1, "a": "(21 − 12) ÷ 6 = 9 ÷ 6 = **1.5 cm/day**. **(1)** *(No unit = no mark.)*", "options": ["9 cm/day", "1.5 cm/day", "1.5", "3.5 cm/day"], "correct": 1}, {"q": "A population fell from 850 to 663. Calculate the percentage decrease.", "marks": 1, "a": "(850 − 663) ÷ 850 × 100 = 187 ÷ 850 × 100 = **22 %**. **(1)**", "options": ["22 %", "28 %", "78 %", "187 %"], "correct": 0}, {"q": "In a sample there were 18 producers and 6 primary consumers. Give the **simplest whole number ratio of primary consumers to producers**.", "marks": 1, "a": "Consumers : producers = 6 : 18 = **1 : 3**. **(1)** *(Note the order asked for — consumers first.)*", "options": ["3 : 1", "6 : 18", "1 : 4", "1 : 3"], "correct": 3}, {"q": "A pupil tested one leaf disc at each of four light intensities and concluded that light intensity affects photosynthesis. Give **two** criticisms of the investigation.", "marks": 2, "a": "Any two: only **one disc** was tested at each intensity, so results are **not reliable** — should repeat and average (1); other variables such as **temperature and CO₂ concentration** may not have been kept constant (1); only **four** intensities were tested. **(2)**"}, {"q": "A pupil found enzyme activity peaked between 35 °C and 45 °C. Describe how to find the optimum temperature **more accurately**.", "marks": 1, "a": "Repeat the experiment testing **more temperatures between 35 °C and 45 °C**, at **smaller intervals**. **(1)**", "options": ["Use a different enzyme to check the result", "Test more temperatures between 35 °C and 45 °C, at smaller intervals", "Repeat the experiment at 35 °C and 45 °C and take an average", "Test a much wider range of temperatures, from 0 °C to 100 °C"], "correct": 1}], "boss": null, "paper": null, "special": "skills"}, {"n": 14, "date": "Mon 5 Oct", "title": "Full mock paper", "area": "All", "warmup": [], "drill": "", "reps": [], "boss": null, "paper": {"label": "Full mock paper", "total": 40, "items": [{"q": "Define **biodiversity**.", "marks": 1, "a": "The **total variety of species** in an ecosystem. (1)", "options": ["All the organisms living in a habitat", "The range of habitats found in an ecosystem", "The total variety of species in an ecosystem", "All the organisms of one species in a habitat"], "correct": 2}, {"q": "Name the two types of competition and state which is more intense.", "marks": 2, "a": "**Interspecific** and **intraspecific** (1); **intraspecific** is more intense (1). (2)"}, {"q": "Name the organelle that is the site of photosynthesis.", "marks": 1, "a": "**Chloroplast**. (1)", "options": ["Chloroplast", "Mitochondrion", "Ribosome", "Vacuole"], "correct": 0}, {"q": "State what a **gene** is.", "marks": 1, "a": "A **section of DNA that codes for a protein**. (1)", "options": ["A section of DNA", "A chromosome found in the nucleus", "A chain of amino acids", "A section of DNA that codes for a protein"], "correct": 3}, {"q": "Name **three** functions of proteins other than enzymes.", "marks": 3, "a": "Any three of **structural, hormones, antibodies, receptors**. (3)"}, {"q": "State **two** abiotic factors.", "marks": 1, "a": "Any two of **light intensity, moisture, pH, temperature**. (1)", "options": ["Food availability and pH", "Light intensity and temperature", "Grazing and predation", "Competition and disease"], "correct": 1}, {"q": "Name the molecule that carries a complementary copy of the genetic code to the ribosome.", "marks": 1, "a": "**mRNA (messenger RNA)**. (1)", "options": ["mRNA (messenger RNA)", "DNA", "A plasmid", "An amino acid"], "correct": 0}, {"q": "Describe the **two stages of photosynthesis**, naming the inputs and outputs of each.", "marks": 4, "a": "**Light reactions:** light energy is **trapped by chlorophyll in the chloroplast** and converted to chemical energy used to **generate ATP** (1); **water is split** into **hydrogen and oxygen**, and **oxygen diffuses out** (1).\n   **Carbon fixation:** a series of **enzyme-controlled** reactions (1) using **hydrogen and ATP** from the light reactions plus **carbon dioxide** to produce **sugar** (1). **(4)**"}, {"q": "Explain why **intraspecific** competition is more intense than **inter**specific competition.", "marks": 2, "a": "Members of the **same species** require **exactly the same resources** (1), so they compete for **all** of them, whereas different species compete only for **one or a few** shared resources (1). **(2)**"}, {"q": "Describe how the addition of fertiliser to a field can lead to the death of fish in a nearby river.", "marks": 4, "a": "Nitrates **leach** into the river (1); **algal populations increase / an algal bloom forms**, **reducing light** so aquatic plants die (1); **bacteria feed on the dead algae and plants and increase greatly in number** (1); the bacteria **use up large quantities of oxygen**, so there is too little oxygen for the fish (1). **(4)**"}, {"q": "Explain how a population of insects can become resistant to a pesticide.", "marks": 3, "a": "A **random mutation** produced an allele giving resistance — **variation** already existed in the population (1); the pesticide acts as a **selection pressure**, so **resistant insects survive and reproduce**, passing on the **favourable allele** (1); the **frequency of that allele increases** in the population over generations (1). **(3)**"}, {"q": "Define **osmosis**.", "marks": 2, "a": "The movement of **water molecules** (1) from a **higher water concentration to a lower water concentration through a selectively permeable membrane** (1). **(2)**"}, {"q": "Explain why an enzyme is **specific** to its substrate.", "marks": 2, "a": "The **active site** has a specific **shape** (1) that is **complementary only to its specific substrate**, so no other substrate can bind (1). **(2)**"}, {"q": "Explain why a pyramid of numbers may not be a true pyramid, using an example.", "marks": 1, "a": "Because of **different body sizes** — e.g. **one large oak tree** supports many caterpillars, so the producer bar is narrower than the bar above it. *(Or: parasites at the top level are very numerous.)* **(1)**", "options": ["Because there are always more producers than consumers", "Because parasites are not counted in a pyramid of numbers", "Because of different body sizes — one large oak tree supports many caterpillars, so the producer bar is narrower than the one above it", "Because energy is lost as heat at every level"], "correct": 2}, {"q": "In a food chain, the producer level holds 45 000 kJ/m²/year and the primary consumers hold 4 500 kJ/m²/year.\n\na) Calculate the percentage of energy transferred. (1)\n\nb) State **three** ways the remaining energy was lost. (3)", "marks": 4, "a": "a) 4 500 ÷ 45 000 × 100 = **10 %** (1)\n    b) **Heat**, **movement**, **undigested materials** (3) **(4 total)**"}, {"q": "Potato discs were placed in sucrose solutions. Change in mass was: 0.0 M → +9 %; 0.3 M → +2 %; 0.5 M → −4 %; 0.7 M → −11 %.\n\na) Predict the concentration at which there would be **no change in mass**, and explain your answer. (2)\n\nb) Explain the result at 0.7 M. (2)", "marks": 4, "a": "a) Between **0.3 M and 0.5 M** (accept ~0.4 M) (1), because this is where the change in mass crosses **zero** — the water concentration of the solution **equals** that inside the potato cells, so there is **no net movement of water** (1). **(2)**\n    b) The water concentration **outside** the cells is **lower** than inside (1), so water moves **out of the cells by osmosis** and the discs lose mass (1). **(2)**"}, {"q": "An enzyme's activity was measured at pH 2, 4, 6, 8 and 10. Activity peaked at pH 4.\n\na) Explain the low activity at pH 10. (2)\n\nb) Describe how the pupil could find the optimum pH more accurately. (1)\n\nc) The experiment was carried out once at each pH. State how reliability could be improved. (1)", "marks": 4, "a": "a) The enzyme is **denatured** at pH 10 (1); the **shape of its active site changes** so it is **no longer complementary to the substrate** (1). **(2)**\n    b) Test **more pH values at smaller intervals between pH 2 and pH 6**. **(1)**\n    c) **Repeat each pH and calculate an average.** **(1)**"}]}, "special": null}, {"n": 15, "date": "Tue 6 Oct", "title": "Final consolidation", "area": "All", "warmup": [], "drill": "", "reps": [], "boss": null, "paper": null, "special": "final", "sequences": [{"t": "Photosynthesis — the two stages", "a": "**Light reactions:** light energy trapped by **chlorophyll** in the **chloroplasts** → converted to chemical energy → used to **generate ATP**; **water is split** into **hydrogen** and **oxygen**; oxygen diffuses out of the cell.\n\n**Passes on: hydrogen and ATP.**\n\n**Carbon fixation:** a series of **enzyme-controlled** reactions using **hydrogen + ATP + carbon dioxide** to produce **sugar**."}, {"t": "The algal bloom chain", "a": "1. Fertiliser **leaches** into fresh water — extra unwanted **nitrates**\n2. **Algal populations increase** → algal bloom\n3. The bloom **reduces light levels**\n4. **Aquatic plants die**\n5. **Bacteria feed** on the dead plants and algae\n6. **Bacteria increase greatly in number**\n7. Bacteria **use up large quantities of oxygen** → too little oxygen for other organisms"}, {"t": "Natural selection — four steps", "a": "1. Species produce **more offspring than the environment can sustain**\n2. There is **variation** in the population, and a **selection pressure**\n3. The **best adapted survive to reproduce**, passing on the **favourable alleles** that give the selective advantage\n4. Those **alleles increase in frequency** in the population"}, {"t": "Speciation", "a": "1. Part of a population is **isolated by an isolation barrier** — **geographical**, **ecological** or **behavioural**\n2. **Different mutations** occur in each sub-population\n3. **Natural selection selects for different mutations**, because the **selection pressures differ**\n4. Each sub-population evolves until they are so **genetically different** they are **two different species**"}, {"t": "Enzyme denaturation", "a": "The enzyme is **denatured** → the **shape of the active site changes** → it is **no longer complementary to the substrate** → the substrate cannot bind → the **rate of reaction falls**.\n\nNever write that the enzyme *dies* or is *killed*. It is a molecule."}], "checklist": ["Finished by 21:00 — cramming past that costs more in recall than it gains", "Ruler, calculator and spare pen packed tonight", "Read the quick-reference once — the ten answers that score zero", "Sleep. Highest-return revision available at this point."], "examRules": ["Underline the command word before answering: state, describe, explain, calculate, suggest", "Marks = points. A 3-mark question wants three separate points", "Every calculation gets a unit", "Nothing blank — a sensible guess costs nothing", "An 'explain' answer should contain a because or a so that"]}]}</script>
+<script>
+(function(){
+"use strict";
+const COURSE = JSON.parse(document.getElementById('course-data').textContent);
+const DAYS = COURSE.days;
+
+/* ---------------- state ---------------- */
+let S = { days:{}, offenders:[], drafts:{} };
+let saveTimer=null;
+const LS='apass.v1';
+
+function loadLocal(){ try{ const r=localStorage.getItem(LS); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){} }
+function saveLocal(){ try{ localStorage.setItem(LS, JSON.stringify(S)); }catch(e){} }
+function note(t){ const n=document.getElementById('saveNote'); n.textContent=t||' '; }
+
+function save(){
+  saveLocal();
+  note('Progress saved on this device');
+}
+
+/* ---------------- helpers ---------------- */
+function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+
+function inline(s){
+  s = esc(s);
+  s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s = s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  s = s.replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+  return s;
+}
+
+/* compact markdown renderer for the drill notes */
+function md(src){
+  if(!src) return '';
+  const lines = src.replace(/\r/g,'').split('\n');
+  let out='', i=0;
+  function flushTable(){
+    let rows=[];
+    while(i<lines.length && /^\s*\|/.test(lines[i])){ rows.push(lines[i]); i++; }
+    if(rows.length<2) return;
+    const cells = r => r.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+    const head = cells(rows[0]);
+    const body = rows.slice(2).map(cells);
+    out += '<div class="tablewrap"><table><thead><tr>' +
+      head.map(h=>'<th>'+inline(h)+'</th>').join('') + '</tr></thead><tbody>' +
+      body.map(r=>'<tr>'+r.map(c=>'<td>'+inline(c)+'</td>').join('')+'</tr>').join('') +
+      '</tbody></table></div>';
+  }
+  while(i<lines.length){
+    const l = lines[i];
+    if(/^\s*$/.test(l)){ i++; continue; }
+    if(/^\s*\|/.test(l)){ flushTable(); continue; }
+    let m;
+    if((m=l.match(/^(#{3,4})\s+(.*)$/))){ out+='<h3>'+inline(m[2])+'</h3>'; i++; continue; }
+    if(/^>\s?/.test(l)){
+      let buf=[];
+      while(i<lines.length && /^>\s?/.test(lines[i])){ buf.push(lines[i].replace(/^>\s?/,'')); i++; }
+      const txt=buf.join(' ');
+      const cls = /⚠️/.test(txt) ? ' class="warnquote"' : '';
+      out+='<blockquote'+cls+'><p>'+inline(txt)+'</p></blockquote>'; continue;
+    }
+    if(/^\s*[-*]\s+/.test(l)){
+      out+='<ul>';
+      while(i<lines.length && /^\s*[-*]\s+/.test(lines[i])){ out+='<li>'+inline(lines[i].replace(/^\s*[-*]\s+/,''))+'</li>'; i++; }
+      out+='</ul>'; continue;
+    }
+    if(/^\s*\d+\.\s+/.test(l)){
+      out+='<ol>';
+      while(i<lines.length && /^\s*\d+\.\s+/.test(lines[i])){ out+='<li>'+inline(lines[i].replace(/^\s*\d+\.\s+/,''))+'</li>'; i++; }
+      out+='</ol>'; continue;
+    }
+    if(/^---+$/.test(l.trim())){ i++; continue; }
+    let buf=[];
+    while(i<lines.length && !/^\s*$/.test(lines[i]) && !/^\s*[|>#-]/.test(lines[i]) && !/^\s*\d+\.\s/.test(lines[i]) && !(buf.length && /^\s*[a-e]\)\s/.test(lines[i]))){ buf.push(lines[i]); i++; }
+    if(buf.length) out+='<p>'+inline(buf.join(' '))+'</p>';
+  }
+  return out;
+}
+
+function dayState(n){
+  if(!S.days[n]) S.days[n]={stage:0, marks:{}, picks:{}, warm:{}, xp:0, done:false};
+  if(!S.days[n].picks) S.days[n].picks={};
+  return S.days[n];
+}
+function totalXP(){ let t=0; for(const k in S.days) t+=(S.days[k].xp||0); return t; }
+function streak(){
+  let run=0;
+  for(let n=1;n<=DAYS.length;n++){ if(S.days[n] && S.days[n].done) run++; else if(n<=todayIndex()) run=0; }
+  return run;
+}
+function todayIndex(){
+  const start = new Date(2026,8,22);
+  const now = new Date();
+  const diff = Math.floor((now - start)/86400000);
+  return Math.min(Math.max(diff+1,1),DAYS.length);
+}
+function daysToTest(){
+  const t = new Date(2026,9,7);
+  return Math.max(0, Math.ceil((t - new Date())/86400000));
+}
+
+/* ---------------- offenders ---------------- */
+function addOffender(day,q,a,got,max){
+  S.offenders = S.offenders.filter(function(o){ return !(o.day===day && o.q===q); });
+  S.offenders.push({day:day,q:q,a:a,got:got,max:max,ts:Date.now()});
+}
+function dropOffender(day,q){
+  S.offenders = S.offenders.filter(function(o){ return !(o.day===day && o.q===q); });
+}
+
+/* ---------------- render ---------------- */
+let tab='mission', cur=todayIndex();
+const view=document.getElementById('view');
+
+function paintStats(){
+  document.getElementById('xpStat').textContent = totalXP();
+  document.getElementById('streakStat').textContent = streak();
+  const d=daysToTest();
+  document.getElementById('countdown').textContent = d===0 ? 'test today' : (d+(d===1?' day to go':' days to go'));
+}
+
+function strip(){
+  let h='<div class="strip">';
+  DAYS.forEach(function(d){
+    const st=S.days[d.n];
+    const state = st&&st.done ? 'done' : (d.n===todayIndex() ? 'today' : '');
+    h+='<button class="chip" data-day="'+d.n+'" data-state="'+state+'" aria-current="'+(d.n===cur)+'">'+
+       '<b>'+String(d.n).padStart(2,'0')+'</b><i>'+d.date.split(' ')[0]+'</i>'+
+       (st&&st.done?'<span class="dot"></span>':'')+'</button>';
+  });
+  return h+'</div>';
+}
+
+function stageBar(stage, labels){
+  let h='<div class="steps">';
+  labels.forEach(function(_,i){ h+='<div class="step'+(i<=stage?' on':'')+'"></div>'; });
+  h+='</div><div class="steplabel">';
+  labels.forEach(function(l,i){ h+='<span'+(i===stage?' style="color:var(--accent);font-weight:600"':'')+'>'+l+'</span>'; });
+  return h+'</div>';
+}
+
+function qBlock(day, idx, item, prefix){
+  const st=dayState(day);
+  const key=prefix+idx;
+  const awarded = st.marks[key];
+  const label = prefix==='b' ? 'BOSS' : 'Q'+(idx+1);
+  const isMcq = !!item.options;
+
+  let h='<div class="q"><div class="qnum"><span class="n">'+label+'</span>'+
+    '<span class="m">'+(isMcq?'choose one · ':'')+item.marks+' mark'+(item.marks>1?'s':'')+'</span></div>'+
+    '<div class="prose">'+md(item.q)+'</div>';
+
+  /* ---------- multiple choice ---------- */
+  if(isMcq){
+    const picked = st.picks ? st.picks[key] : undefined;
+    h+='<div class="opts">';
+    item.options.forEach(function(o,i){
+      let cls='opt';
+      if(picked!==undefined){
+        if(i===item.correct) cls+=' right';
+        else if(i===picked) cls+=' wrong';
+        else cls+=' dim';
+      }
+      h+='<button class="'+cls+'"'+(picked!==undefined?' disabled':'')+' data-pick="'+day+'|'+key+'|'+i+'">'+
+         '<span class="ltr">'+'ABCD'[i]+'</span><span class="otxt">'+inline(o)+'</span>'+
+         (picked!==undefined && i===item.correct ? '<span class="tick">✓</span>' : '')+
+         (picked!==undefined && i===picked && i!==item.correct ? '<span class="cross">✕</span>' : '')+
+         '</button>';
+    });
+    h+='</div>';
+    if(picked!==undefined){
+      h+='<div class="scheme'+(picked===item.correct?'':' missed')+'">'+
+         '<div class="lbl">'+(picked===item.correct?'Correct — 1 mark':'Not quite — here is why')+'</div>'+
+         '<div class="prose">'+md(item.a)+'</div></div>';
+    }
+    return h+'</div>';
+  }
+
+  /* ---------- written, self-marked ---------- */
+  const revealed = awarded!==undefined || st.marks['r'+key];
+  h+='<textarea id="ta-'+day+'-'+key+'" placeholder="Write your answer here first — then reveal the mark scheme.">'+
+      esc(S.drafts[day+'-'+key]||'')+'</textarea>';
+  if(!revealed){
+    h+='<div class="rowbtns"><button class="btn" data-reveal="'+day+'|'+key+'">Reveal mark scheme</button></div>';
+  }else{
+    h+='<div class="scheme"><div class="lbl">Mark scheme</div><div class="prose">'+md(item.a)+'</div></div>'+
+       '<div class="marks"><span class="lbl">Marks earned</span>';
+    for(let m=0;m<=item.marks;m++){
+      h+='<button class="mk'+(m===0?' zero':'')+'" aria-pressed="'+(awarded===m)+'" data-mark="'+day+'|'+key+'|'+m+'|'+item.marks+'">'+m+'</button>';
+    }
+    h+='</div>';
+  }
+  return h+'</div>';
+}
+
+function renderDay(n){
+  const d=DAYS.find(function(x){return x.n===n;});
+  const st=dayState(n);
+  let h=strip();
+
+  if(n>todayIndex()){
+    h+='<div class="banner"><b>This one is scheduled for '+d.date+'.</b> You can start it early, but the warm-up recalls the day before — it works better in order.</div>';
+  }
+
+  h+='<div class="card">'+
+     '<div class="dayhead"><div><div class="eyebrow">Day '+String(n).padStart(2,'0')+' · '+d.date+'</div>'+
+     '<h2>'+esc(d.title)+'</h2></div><span class="area">'+esc(d.area)+'</span></div>';
+
+  /* ---- paper days ---- */
+  if(d.paper){
+    const items=d.paper.items;
+    let got=0, total=0, marked=0;
+    items.forEach(function(it,i){ total+=it.marks; const a=st.marks['p'+i]; if(a!==undefined){got+=a; marked++;} });
+    h+='<p class="sub">'+esc(d.paper.label)+' · '+total+' marks · closed book, timed. Multiple choice where the real paper uses it; write the rest out before revealing.</p>';
+    h+='</div><div class="card">';
+    items.forEach(function(it,i){ h+=qBlock(n,i,it,'p'); });
+    h+='</div>';
+    if(marked===items.length){
+      const pct=got/total;
+      const band = pct>=.85?'a':(pct>=.68?'b':'c');
+      const verdict = pct>=.85?'A territory. Move on with confidence.':
+                      pct>=.68?'Solid. Every lost mark goes in Repeat Offenders.':
+                      pct>=.55?'Re-read the core drills for the topics you dropped.':
+                      'Pick the three weakest key areas and redo those drills — not all of it.';
+      h+='<div class="card done-big"><div class="xp mono">'+got+' / '+total+'</div>'+
+         '<div class="band '+band+'">'+Math.round(pct*100)+'%</div>'+
+         '<p class="sub" style="margin-top:10px">'+verdict+'</p>'+
+         (st.done?'':'<div class="nav"><button class="btn primary full" data-finish="'+n+'">Log '+(10+got)+' XP and finish</button></div>')+
+         '</div>';
+    }
+    return h;
+  }
+
+  /* ---- day 15 ---- */
+  if(d.special==='final'){
+    h+='<p class="sub">The test is tomorrow. Nothing new today — this is about making what you know come out under pressure. 25 minutes, then stop.</p></div>';
+    const weak = S.offenders.slice().sort(function(a,b){return (a.got/a.max)-(b.got/b.max);}).slice(0,3);
+    h+='<div class="card"><div class="eyebrow">1 · Your three weak spots</div>';
+    if(weak.length){
+      h+='<p class="sub" style="margin-bottom:12px">Straight from what you actually dropped marks on. Re-read those core drills — just these.</p>';
+      weak.forEach(function(o){
+        const dd=DAYS.find(function(x){return x.n===o.day;});
+        h+='<div class="off"><span class="tag">Day '+String(o.day).padStart(2,'0')+' · '+esc(dd?dd.title:'')+' · '+o.got+'/'+o.max+'</span>'+
+           '<div class="qt">'+inline(o.q)+'</div></div>';
+      });
+    } else {
+      h+='<p class="empty">Nothing logged — either a clean run or the papers were skipped. Re-read the three key areas you feel least sure of.</p>';
+    }
+    h+='</div><div class="card"><div class="eyebrow">2 · The five sequences</div>'+
+       '<p class="sub" style="margin-bottom:14px">These carry the 3- and 4-mark questions. Write each one out cold, then check.</p>';
+    (d.sequences||[]).forEach(function(s,i){
+      const open = st.warm['seq'+i];
+      h+='<div class="seq"><h4>'+esc(s.t)+'</h4>'+
+         (open?'<div class="prose" style="margin-top:10px">'+md(s.a)+'</div>':
+               '<div class="rowbtns"><button class="btn" data-seq="'+n+'|'+i+'">Check yourself</button></div>')+
+         '</div>';
+    });
+    h+='</div><div class="card"><div class="eyebrow">3 · Then stop</div>';
+    (d.checklist||[]).forEach(function(c,i){
+      h+='<label class="check"><input type="checkbox" id="ck-'+i+'" data-check="'+i+'"'+(st.warm['ck'+i]?' checked':'')+'><span>'+inline(c)+'</span></label>';
+    });
+    h+='</div><div class="card"><div class="eyebrow">In the test tomorrow</div><div class="prose"><ul>';
+    (d.examRules||[]).forEach(function(r){ h+='<li>'+inline(r)+'</li>'; });
+    h+='</ul></div>'+(st.done?'':'<div class="nav"><button class="btn primary full" data-finish="'+n+'">Done — log 10 XP</button></div>')+'</div>';
+    return h;
+  }
+
+  /* ---- standard day ---- */
+  const hasWarm = d.warmup.length>0;
+  const labels = hasWarm ? ['Warm-up','Drill','Exam reps','Boss'] : ['Drill','Exam reps'];
+  if(!d.boss && hasWarm) labels.pop();
+  const stage = Math.min(st.stage||0, labels.length-1);
+  h+='<p class="sub">20 minutes. Timer on. Write every answer before you reveal anything.</p>'+
+     stageBar(stage, labels)+'</div>';
+
+  const nameAt = labels[stage];
+
+  if(nameAt==='Warm-up'){
+    h+='<div class="card"><div class="eyebrow">Warm-up · 3 min · no notes</div>'+
+       '<p class="sub" style="margin-bottom:14px">Say each one out loud before you tap. Out loud genuinely helps.</p>';
+    d.warmup.forEach(function(w,i){
+      const shown=st.warm['w'+i];
+      h+='<div class="flash"><div class="qq">'+inline(w.q)+'</div>';
+      if(shown){
+        h+='<div class="aa">'+inline(w.a)+'</div>';
+      }else{
+        h+='<div class="rowbtns"><button class="btn" data-warm="'+n+'|'+i+'">Show answer</button></div>';
+      }
+      h+='</div>';
+    });
+    h+='<div class="nav"><button class="btn primary full" data-stage="'+n+'|1">Next — core drill</button></div></div>';
+    return h;
+  }
+
+  if(nameAt==='Drill'){
+    h+='<div class="card"><div class="eyebrow">Core drill · 6 min</div>'+
+       '<div class="prose">'+md(d.drill)+'</div>'+
+       '<div class="nav"><button class="btn ghost" data-stage="'+n+'|'+(hasWarm?0:0)+'">Back</button>'+
+       '<button class="btn primary" data-stage="'+n+'|'+(hasWarm?2:1)+'">Got it — exam reps</button></div></div>';
+    return h;
+  }
+
+  if(nameAt==='Exam reps'){
+    let answered=0;
+    d.reps.forEach(function(it,i){ if(st.marks['q'+i]!==undefined) answered++; });
+    h+='<div class="card"><div class="eyebrow">Exam reps · 8 min</div>'+
+       '<p class="sub" style="margin-bottom:16px">Short recall questions are multiple choice — one tap, instant feedback. The longer ones you write out, reveal, then mark yourself, because that is how three quarters of the real paper works. Mark honestly: a mark you award yourself that SQA wouldn’t is a mark you lose in the test.</p>';
+    d.reps.forEach(function(it,i){ h+=qBlock(n,i,it,'q'); });
+    const nextStage = d.boss ? (hasWarm?3:2) : null;
+    h+='<div class="nav"><button class="btn ghost" data-stage="'+n+'|'+(hasWarm?1:0)+'">Back</button>';
+    if(nextStage!==null){
+      h+='<button class="btn primary" data-stage="'+n+'|'+nextStage+'"'+(answered<d.reps.length?' disabled':'')+'>Boss question</button>';
+    }else if(!st.done){
+      h+='<button class="btn primary" data-finish="'+n+'"'+(answered<d.reps.length?' disabled':'')+'>Finish the day</button>';
+    }
+    h+='</div></div>';
+    return h;
+  }
+
+  /* boss */
+  const bossMark = st.marks['b0'];
+  h+='<div class="card"><div class="eyebrow">Boss question · 3 min</div>'+
+     '<p class="sub" style="margin-bottom:16px">Harder on purpose. Write this one out in full \u2014 it is the kind of question that separates an A from a B.</p>'+
+     qBlock(n,0,d.boss,'b');
+  h+='<div class="nav"><button class="btn ghost" data-stage="'+n+'|'+(hasWarm?2:1)+'">Back</button>';
+  if(!st.done) h+='<button class="btn primary" data-finish="'+n+'"'+(bossMark===undefined?' disabled':'')+'>Finish the day</button>';
+  h+='</div></div>';
+
+  if(st.done){
+    h+='<div class="card done-big"><div class="xp mono">+'+st.xp+' XP</div><p class="sub">Day '+n+' logged. '+
+       (n<DAYS.length?'Next up: Day '+(n+1)+' — '+esc(DAYS[n].title)+'.':'That is the last one. Good luck tomorrow.')+'</p></div>';
+  }
+  return h;
+}
+
+function renderProgress(){
+  const doneCount = Object.keys(S.days).filter(function(k){return S.days[k].done;}).length;
+  const p8 = S.days[8], p14 = S.days[14];
+  function paperScore(n,total){
+    const st=S.days[n]; if(!st) return '—';
+    let g=0,c=0; const d=DAYS.find(function(x){return x.n===n;});
+    d.paper.items.forEach(function(it,i){ const a=st.marks['p'+i]; if(a!==undefined){g+=a;c++;} });
+    return c?g+'/'+total:'—';
+  }
+  let h='<div class="grid">'+
+    '<div class="tile"><b>'+totalXP()+'</b><span>XP of 210</span></div>'+
+    '<div class="tile"><b>'+doneCount+'/'+DAYS.length+'</b><span>Days done</span></div>'+
+    '<div class="tile"><b>'+paperScore(8,20)+'</b><span>Unit 3 paper</span></div>'+
+    '<div class="tile"><b>'+paperScore(14,40)+'</b><span>Mock paper</span></div>'+
+    '</div>';
+
+  h+='<div class="card" style="margin-top:14px"><div class="eyebrow">Every day</div><div class="tablewrap"><table style="width:100%;font-size:14px;border-collapse:collapse">'+
+     '<thead><tr><th>Day</th><th>Topic</th><th>Marks</th><th>XP</th></tr></thead><tbody>';
+  DAYS.forEach(function(d){
+    const st=S.days[d.n];
+    let got=0, tot=0;
+    const items = d.paper ? d.paper.items : d.reps.concat(d.boss?[d.boss]:[]);
+    const pre = d.paper ? 'p' : null;
+    items.forEach(function(it,i){
+      tot+=it.marks;
+      if(!st) return;
+      const key = pre ? 'p'+i : (i<d.reps.length ? 'q'+i : 'b0');
+      const a=st.marks[key]; if(a!==undefined) got+=a;
+    });
+    h+='<tr><td class="mono">'+String(d.n).padStart(2,'0')+'</td><td>'+esc(d.title)+'</td>'+
+       '<td class="mono">'+(st&&st.done?got+'/'+tot:'—')+'</td>'+
+       '<td class="mono">'+(st&&st.xp?st.xp:'—')+'</td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  return h;
+}
+
+function renderOffenders(){
+  let h='<div class="card"><div class="eyebrow">Repeat offenders</div>'+
+        '<p class="sub" style="margin-bottom:16px">Every question you dropped a mark on, worst first. This list is what Day 15 is built from.</p>';
+  if(!S.offenders.length){
+    h+='<p class="empty">Nothing here yet. It fills up as you mark your answers — and an empty list after Day 08 means something is being marked too generously.</p>';
+  }else{
+    const sorted=S.offenders.slice().sort(function(a,b){ return (a.got/a.max)-(b.got/b.max); });
+    sorted.forEach(function(o){
+      const d=DAYS.find(function(x){return x.n===o.day;});
+      h+='<div class="off"><span class="tag">Day '+String(o.day).padStart(2,'0')+' · '+esc(d?d.title:'')+' · '+o.got+'/'+o.max+'</span>'+
+         '<div class="qt">'+inline(o.q)+'</div><div class="at">'+inline(o.a)+'</div></div>';
+    });
+  }
+  return h+'</div>';
+}
+
+function render(){
+  paintStats();
+  document.getElementById('tab-mission').setAttribute('aria-selected', tab==='mission');
+  document.getElementById('tab-progress').setAttribute('aria-selected', tab==='progress');
+  document.getElementById('tab-offenders').setAttribute('aria-selected', tab==='offenders');
+  if(tab==='mission') view.innerHTML=renderDay(cur);
+  else if(tab==='progress') view.innerHTML=renderProgress();
+  else view.innerHTML=renderOffenders();
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener('click', function(e){
+  const t=e.target.closest('button, label');
+  if(!t) return;
+
+  if(t.id==='tab-mission'){ tab='mission'; render(); return; }
+  if(t.id==='tab-progress'){ tab='progress'; render(); return; }
+  if(t.id==='tab-offenders'){ tab='offenders'; render(); return; }
+
+  if(t.dataset.day){ cur=+t.dataset.day; tab='mission'; render(); window.scrollTo({top:0,behavior:'smooth'}); return; }
+
+  if(t.dataset.stage){
+    const p=t.dataset.stage.split('|');
+    dayState(+p[0]).stage=+p[1]; save(); render(); window.scrollTo({top:0,behavior:'smooth'}); return;
+  }
+
+  if(t.dataset.warm){
+    const p=t.dataset.warm.split('|');
+    dayState(+p[0]).warm['w'+p[1]]=true; save(); render(); return;
+  }
+
+  if(t.dataset.seq){
+    const p=t.dataset.seq.split('|');
+    dayState(+p[0]).warm['seq'+p[1]]=true; save(); render(); return;
+  }
+
+  if(t.dataset.check!==undefined && t.tagName==='LABEL'){
+    const i=t.dataset.check, st=dayState(cur);
+    setTimeout(function(){ st.warm['ck'+i]=!st.warm['ck'+i]; save(); },0); return;
+  }
+
+  if(t.dataset.pick){
+    const p=t.dataset.pick.split('|');
+    const day=+p[0], key=p[1], i=+p[2];
+    const st=dayState(day);
+    if(!st.picks) st.picks={};
+    if(st.picks[key]!==undefined) return;
+    st.picks[key]=i;
+    const d=DAYS.find(function(x){return x.n===day;});
+    const item = key[0]==='p' ? d.paper.items[+key.slice(1)]
+               : key[0]==='q' ? d.reps[+key.slice(1)] : d.boss;
+    const got = (i===item.correct) ? item.marks : 0;
+    st.marks[key]=got;
+    if(got<item.marks) addOffender(day, item.q, item.a, got, item.marks); else dropOffender(day, item.q);
+    save(); render(); return;
+  }
+
+  if(t.dataset.reveal){
+    const p=t.dataset.reveal.split('|');
+    dayState(+p[0]).marks['r'+p[1]]=true; save(); render(); return;
+  }
+
+  if(t.dataset.mark){
+    const p=t.dataset.mark.split('|');
+    const day=+p[0], key=p[1], m=+p[2], max=+p[3];
+    const st=dayState(day);
+    st.marks[key]=m;
+    const d=DAYS.find(function(x){return x.n===day;});
+    let item=null;
+    if(key[0]==='p') item=d.paper.items[+key.slice(1)];
+    else if(key[0]==='q') item=d.reps[+key.slice(1)];
+    else item=d.boss;
+    if(m<max) addOffender(day, item.q, item.a, m, max); else dropOffender(day, item.q);
+    save(); render(); return;
+  }
+
+  if(t.dataset.finish){
+    const n=+t.dataset.finish, d=DAYS.find(function(x){return x.n===n;}), st=dayState(n);
+    let xp=10;
+    if(d.paper){ let g=0; d.paper.items.forEach(function(it,i){ const a=st.marks['p'+i]; if(a!==undefined) g+=a; }); xp+=g; }
+    else if(d.boss && st.marks['b0']===d.boss.marks) xp+=5;
+    st.xp=xp; st.done=true; save(); render(); window.scrollTo({top:0,behavior:'smooth'}); return;
+  }
+});
+
+document.addEventListener('input', function(e){
+  if(e.target.tagName!=='TEXTAREA') return;
+  const id=e.target.id.replace('ta-','');
+  const bits=id.split('-');
+  S.drafts[bits[0]+'-'+bits[1]]=e.target.value;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(saveLocal,900);
+});
+
+/* ---------------- boot ---------------- */
+loadLocal();
+render();
+note('Progress saves on this device');
+})();
+</script>
+</body>
+</html>
