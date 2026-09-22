@@ -1,6 +1,8 @@
 # Day 14 — Mon 5 Oct · Full mock paper 🏁
 
-**The test is tomorrow (Tue 6 / Wed 7 Oct).** Give this 35 minutes, closed book, timed. Then mark it hard.
+**Two days to go — test is Wed 7 Oct.** Give this 35 minutes, closed book, timed. Then mark it hard.
+
+Doing the mock two days out, not the night before, is deliberate: it leaves a full day to fix whatever it exposes.
 
 **Covers:** all of Unit 3 + Unit 1 key areas 1–4. **40 marks.**
 
@@ -82,22 +84,19 @@
 
 ## Your score out of 40
 
-| Marks | Grade indication | What to do tonight |
+| Marks | Grade indication | What to do with tomorrow's mission |
 |---|---|---|
-| 34–40 | **A** | Read the quick-reference sheet once. Then stop and sleep. |
-| 28–33 | **A/B border** | Re-read the core drills for the two topics you lost most marks in. Nothing else. |
-| 22–27 | **B/C** | Re-read Days 05, 07, 10 and 12 core drills. Don't attempt new questions. |
-| < 22 | Needs work | Pick the **three** weakest key areas and re-read only those. Panic-cramming all of it will do less than mastering three. |
+| 34–40 | **A** | You're there. Tomorrow is a light read-through — don't add to it. |
+| 28–33 | **A/B border** | List the two topics you lost most marks in — they're tomorrow's focus. |
+| 22–27 | **B/C** | Put Days 05, 07, 10 and 12 at the top of tomorrow's list. |
+| < 22 | Needs work | Pick the **three** weakest key areas for tomorrow. Mastering three beats skimming ten. |
 
 ---
 
-## 🌙 Night-before rules
+## 📌 Before you stop
 
-1. **Stop revising by 21:00.** Cramming past that costs more in recall than it gains.
-2. Read [`../resources/quick-reference.md`](../resources/quick-reference.md) once — that's it.
-3. Pack a **ruler and calculator**. Graph and calculation marks are the cheapest in the paper.
-4. In the test: **command words first**. Underline *describe*, *explain*, *state*, *calculate* before you answer.
+Write your three weakest key areas at the top of the Repeat Offenders list. Tomorrow's mission is built around whatever you put there.
 
 ---
 
-🎉 **Log your final XP.** You've done 14 days of this. Go and get the A.
+✅ **Log your XP (+1 per mark).** ➡️ [Day 15 — Final consolidation](day-15.md)
